@@ -32,7 +32,7 @@ public class Character : MonoBehaviour
 
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
 
-        rb.velocity = movement * speedChar;
+        rb.velocity = movement.normalized * speedChar;
         /* float moveHorizontal = Input.GetAxis("Horizontal");
          float moveVertical = Input.GetAxis("Vertical");
 
