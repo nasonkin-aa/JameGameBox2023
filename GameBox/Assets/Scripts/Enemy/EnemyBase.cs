@@ -7,40 +7,49 @@ public class EnemyBase : MonoBehaviour
 {
     [SerializeReference]
     protected Transform _target;
+
     [SerializeField]
-    protected int _speed = 5;
+    protected float _speed = 5f;
+
     [SerializeField]
-    protected Collider2D _attackCollider;
+    protected PolygonCollider2D _attackCollider;
+
     [SerializeField]
-    protected int _rotationSpeed = 5;
+    protected float _rotationSpeed = 20f;
 
     protected Rigidbody2D _rb;
     protected Collider2D _targetCollider;
+    protected float _hp = 1;
     protected States _state = States.Moving;
 
     protected enum States
     {
         Attacking,
         Moving,
-        BeginsAttacking
+        Dead
     }
 
+    public virtual void GetDamage(float damage)
+    {
+        _hp -= damage;
+        if (_hp <= 0 && _state != States.Dead)
+            StartCoroutine(Die());
+    }
 
-    // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         _rb = transform.GetComponent<Rigidbody2D>();
         _targetCollider = _target.GetComponent<Collider2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    protected virtual void Update()
     {
         if (_state == States.Moving)
             LookAtTarget();
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         StateMachine();
     }
@@ -48,20 +57,17 @@ public class EnemyBase : MonoBehaviour
     protected virtual void MoveToTarget()
     {
         Vector3 directionToTarget = (_target.position - transform.position).normalized;
-
         _rb.velocity = directionToTarget * _speed;
     }
 
     protected virtual void LookAtTarget()
     {
-        //ƒобавить плавность поворота после атаки
-
-
-
         Vector3 targetPosition = new Vector3(_target.position.x, _target.position.y, 0);
+
         float angle = Mathf.Atan2(targetPosition.y - transform.position.y, targetPosition.x - transform.position.x) * Mathf.Rad2Deg;
-        Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * 3.5f);
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
     }
 
 
@@ -71,47 +77,34 @@ public class EnemyBase : MonoBehaviour
         {
             yield break;
         }
-        Debug.Log("Attack");
+
         _state = States.Attacking;
 
-        //animator.SetTrigger("Attack");
-        Debug.Log("Start Attack Animation");
-
-        yield return new WaitForSeconds(1);
-
-        //if (target != null)
-        //{
-        //    target.GetComponent<Health>().TakeDamage(damage);
-        //}
+        yield return new WaitForSeconds(1); // под анмации
 
         _state = States.Moving;
     }
 
     protected virtual void StateMachine()
     {
-        Debug.Log(_state);
         if (_attackCollider.IsTouching(_targetCollider))
         {
-            //Debug.Log("2");
-            //_state = States.Attacking;
             _rb.velocity = Vector3.zero;
             StartCoroutine(Attack());
-            //_state = States.Moving;
         }
 
-        //Debug.Log("3");
         if (_state == States.Moving)
         {
-            //Debug.Log("4");
             MoveToTarget();
         }
-        //Debug.Log("5");
-
-
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    protected virtual IEnumerator Die()
     {
-        Debug.Log("6");
-    }
+        gameObject.GetComponent<Collider2D>().enabled = false;
+        StopCoroutine(Attack()); /// нјдо ли, а вдруг пригодитс€
+        _state = States.Dead;
 
+        yield return new WaitForSeconds(1); // под анмации      
+    }
 }
