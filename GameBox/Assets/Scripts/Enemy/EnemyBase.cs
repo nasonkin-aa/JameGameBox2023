@@ -28,9 +28,6 @@ public class EnemyBase : MonoBehaviour
         Dead
     }
 
-<<<<<<< HEAD:GameBox/Assets/Scripts/EnemyBase.cs
-    void Start()
-=======
     public virtual void GetDamage(float damage)
     {
         _hp -= damage;
@@ -39,18 +36,13 @@ public class EnemyBase : MonoBehaviour
     }
 
     protected virtual void Start()
->>>>>>> kosyan:GameBox/Assets/Scripts/Enemy/EnemyBase.cs
     {
         _rb = transform.GetComponent<Rigidbody2D>();
         _targetCollider = _target.GetComponent<Collider2D>();
     }
 
-<<<<<<< HEAD:GameBox/Assets/Scripts/EnemyBase.cs
-    void Update()
-=======
 
     protected virtual void Update()
->>>>>>> kosyan:GameBox/Assets/Scripts/Enemy/EnemyBase.cs
     {
         if (_state == States.Moving)
             LookAtTarget();
@@ -69,12 +61,6 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void LookAtTarget()
     {
-<<<<<<< HEAD:GameBox/Assets/Scripts/EnemyBase.cs
-        //ƒобавить плавность поворота после атаки
-        gameObject.transform.LookAt(transform.position);
-        transform.gameObject.SetActive(true);
-=======
->>>>>>> kosyan:GameBox/Assets/Scripts/Enemy/EnemyBase.cs
         Vector3 targetPosition = new Vector3(_target.position.x, _target.position.y, 0);
 
         float angle = Mathf.Atan2(targetPosition.y - transform.position.y, targetPosition.x - transform.position.x) * Mathf.Rad2Deg;
