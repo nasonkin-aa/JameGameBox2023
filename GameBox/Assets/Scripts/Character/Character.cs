@@ -8,38 +8,49 @@ public class Character : MonoBehaviour
 
     public float speedChar = 5f;
 
-    private Rigidbody2D rb;
+    public  Rigidbody2D rbChar;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rbChar = GetComponent<Rigidbody2D>();
     }
     private void Update()
     {
-
+      
         LookAt();
 
     }
     private void FixedUpdate()
     {
         PlayerControler();
-
     }
     private void PlayerControler()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        Vector2 movement = Vector2.zero;
 
-        Vector2 movement = new Vector2(moveHorizontal, moveVertical);
+        if (Input.GetKey(KeyCode.A))
+        {
+            movement.x = -1f;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            movement.x = 1f;
+        }
 
-        rb.velocity = movement.normalized * speedChar;
-        /* float moveHorizontal = Input.GetAxis("Horizontal");
-         float moveVertical = Input.GetAxis("Vertical");
+        if (Input.GetKey(KeyCode.W))
+        {
+            movement.y = 1f;
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            movement.y = -1f;
+        }
 
-         Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0f);
+        movement.Normalize();
 
-         rb.MovePosition(transform.position + movement * speed * Time.deltaTime);*/
+        rbChar.velocity = movement * speedChar;
     }
+
 
     private void LookAt()
     {

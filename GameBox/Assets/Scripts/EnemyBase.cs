@@ -25,15 +25,12 @@ public class EnemyBase : MonoBehaviour
         BeginsAttacking
     }
 
-
-    // Start is called before the first frame update
     void Start()
     {
         _rb = transform.GetComponent<Rigidbody2D>();
         _targetCollider = _target.GetComponent<Collider2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (_state == States.Moving)
@@ -55,9 +52,8 @@ public class EnemyBase : MonoBehaviour
     protected virtual void LookAtTarget()
     {
         //ƒобавить плавность поворота после атаки
-
-
-
+        gameObject.transform.LookAt(transform.position);
+        transform.gameObject.SetActive(true);
         Vector3 targetPosition = new Vector3(_target.position.x, _target.position.y, 0);
         float angle = Mathf.Atan2(targetPosition.y - transform.position.y, targetPosition.x - transform.position.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle));
