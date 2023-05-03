@@ -14,8 +14,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField]
     protected PolygonCollider2D _attackCollider;
 
-    [SerializeField]
-    protected float _rotationSpeed = 20f;
+    protected float _rotationSpeed = 180f;
 
     protected Rigidbody2D _rb;
     protected Collider2D _targetCollider;
