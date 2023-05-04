@@ -89,9 +89,9 @@ public class EnemyBase : MonoBehaviour
         }
 
         _state = States.Attacking;
-        agent.enabled = false;
+        agent.speed = 0;
         yield return new WaitForSeconds(1); // под анмации
-        agent.enabled = true;
+        agent.speed = 3;
 
         _state = States.Moving;
     }

@@ -30,7 +30,7 @@ public class RangeEnemy : EnemyBase
         {
             yield break;
         }
-        agent.enabled = false;
+        agent.speed = 0;
 
         _state = States.Attacking;
         Vector3 targetDirection = _target.position - _projectilePoint.position;
@@ -38,7 +38,7 @@ public class RangeEnemy : EnemyBase
         yield return new WaitForSeconds(1);
         Shoot(targetDirection);
         yield return new WaitForSeconds(0.2f);
-        agent.enabled = true;
+        agent.speed = 3;
 
         _state = States.Moving;
     }
