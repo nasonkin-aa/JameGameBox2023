@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class RangeEnemy : EnemyBase
 {
     [SerializeField]
@@ -14,6 +14,7 @@ public class RangeEnemy : EnemyBase
 
     protected override void Start()
     {
+        
         base.Start();
         _projectilePoint = _projectileSpawnPoint.transform;
     }
@@ -29,6 +30,7 @@ public class RangeEnemy : EnemyBase
         {
             yield break;
         }
+        agent.enabled = false;
 
         _state = States.Attacking;
         Vector3 targetDirection = _target.position - _projectilePoint.position;
@@ -36,6 +38,7 @@ public class RangeEnemy : EnemyBase
         yield return new WaitForSeconds(1);
         Shoot(targetDirection);
         yield return new WaitForSeconds(0.2f);
+        agent.enabled = true;
 
         _state = States.Moving;
     }

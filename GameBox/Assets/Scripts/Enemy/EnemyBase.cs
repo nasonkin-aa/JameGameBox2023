@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class EnemyBase : MonoBehaviour
     protected Collider2D _targetCollider;
     protected float _hp = 1;
     protected States _state = States.Moving;
-
+    protected NavMeshAgent agent;
     protected enum States
     {
         Attacking,
@@ -37,6 +38,9 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
         _rb = transform.GetComponent<Rigidbody2D>();
         _targetCollider = _target.GetComponent<Collider2D>();
     }
@@ -55,8 +59,10 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void MoveToTarget()
     {
-        Vector3 directionToTarget = (_target.position - transform.position).normalized;
-        _rb.velocity = directionToTarget * _speed;
+        /*  
+                Vector3 directionToTarget = (_target.position - transform.position).normalized;
+                _rb.velocity = directionToTarget * _speed;*/
+        agent.SetDestination(_target.position);
     }
 
     protected virtual void LookAtTarget()
@@ -78,8 +84,9 @@ public class EnemyBase : MonoBehaviour
         }
 
         _state = States.Attacking;
-
+        agent.enabled = false;
         yield return new WaitForSeconds(1); // под анмации
+        agent.enabled = true;
 
         _state = States.Moving;
     }

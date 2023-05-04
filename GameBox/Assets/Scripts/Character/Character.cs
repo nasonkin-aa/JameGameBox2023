@@ -13,6 +13,7 @@ public class Character : MonoBehaviour
     private void Start()
     {
         rbChar = GetComponent<Rigidbody2D>();
+   
     }
     private void Update()
     {
