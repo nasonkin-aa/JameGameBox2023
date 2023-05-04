@@ -4,11 +4,23 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+
+    [SerializeField]
+    protected float _hp = 1;
+
     private Vector3 mousePos;
 
     public float speedChar = 5f;
 
     public  Rigidbody2D rbChar;
+
+    public virtual void GetDamage(float damage)
+    {
+        Debug.Log("Получен урон");
+        _hp -= damage;
+        if (_hp <= 0)
+            StartCoroutine(Die());
+    }
 
     private void Start()
     {
@@ -60,5 +72,13 @@ public class Character : MonoBehaviour
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
         float angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    }
+
+    protected virtual IEnumerator Die()
+    {
+        //StopCoroutine(); /// нАдо ли, а вдруг пригодится
+        Debug.Log("Персонаж умер, увы");
+
+        yield return new WaitForSeconds(1); // под анмации      
     }
 }

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1470406005075109938}
-  - component: {fileID: 7691090096408400760}
   - component: {fileID: 8841078126186752639}
   - component: {fileID: 2379886967265216696}
   m_Layer: 0
@@ -34,51 +33,6 @@ Transform:
   m_Father: {fileID: 2978446717320399450}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &7691090096408400760
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 72939448345410242}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!50 &8841078126186752639
 Rigidbody2D:
   serializedVersion: 4
@@ -150,11 +104,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 2.5190766, y: 2.0608041}
+    - - {x: 4.7358165, y: 1.3090895}
       - {x: -0.24088626, y: 0.33876944}
       - {x: -0.19157833, y: -0.26036838}
-      - {x: 2.725215, y: -2.0395253}
-      - {x: 3.5090516, y: 0.15216766}
+      - {x: 4.9562187, y: -1.1988548}
+      - {x: 6.276823, y: 0.33986595}
   m_UseDelaunayMesh: 0
 --- !u!1 &2795161093277828643
 GameObject:
@@ -192,7 +146,7 @@ Transform:
   - {fileID: 1470406005075109938}
   - {fileID: 4482479950831589610}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -72.6}
 --- !u!212 &2935467196686733072
 SpriteRenderer:
@@ -333,6 +287,10 @@ MonoBehaviour:
   _target: {fileID: 0}
   _speed: 5
   _attackCollider: {fileID: 2379886967265216696}
+  _attackkDistance: 1
+  _rotationSpeed: 180
+  _hp: 1
+  _damage: 10
 --- !u!114 &8054737763413890275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,6 +306,10 @@ MonoBehaviour:
   _target: {fileID: 0}
   _speed: 5
   _attackCollider: {fileID: 2379886967265216696}
+  _attackkDistance: 5
+  _rotationSpeed: 180
+  _hp: 1
+  _damage: 10
   _projectileSpawnPoint: {fileID: 5680770973247843536}
   _projectile: {fileID: 1846829445862965521, guid: 7d82861972b1e554daa6ff2ebd81d806, type: 3}
 --- !u!1 &5680770973247843536

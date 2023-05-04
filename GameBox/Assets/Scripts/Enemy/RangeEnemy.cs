@@ -24,28 +24,14 @@ public class RangeEnemy : EnemyBase
         base.Update();
     }
 
-    protected override IEnumerator Attack()
+    protected override void DealDamage()
     {
-        if (_state == States.Attacking)
-        {
-            yield break;
-        }
-        agent.speed = 0;
-
-        _state = States.Attacking;
-        Vector3 targetDirection = _target.position - _projectilePoint.position;
-
-        yield return new WaitForSeconds(1);
-        Shoot(targetDirection);
-        yield return new WaitForSeconds(0.2f);
-        agent.speed = 3;
-
-        _state = States.Moving;
+        Shoot(_target.position - _projectilePoint.position);
     }
 
     protected virtual void Shoot(Vector3 direction)
     {
-        Debug.Log("Shoot");
+        //Debug.Log("Shoot");
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         GameObject bullet = Instantiate(_projectile, _projectilePoint.position, Quaternion.Euler(new Vector3(0, 0, angle)));
