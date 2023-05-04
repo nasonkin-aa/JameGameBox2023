@@ -22,6 +22,8 @@ public class EnemyBase : MonoBehaviour
     protected float _hp = 1;
     protected States _state = States.Moving;
     protected NavMeshAgent agent;
+
+    protected Vector2 _previousePos;
     protected enum States
     {
         Attacking,
@@ -43,6 +45,7 @@ public class EnemyBase : MonoBehaviour
         agent.updateUpAxis = false;
         _rb = transform.GetComponent<Rigidbody2D>();
         _targetCollider = _target.GetComponent<Collider2D>();
+        _previousePos = (Vector2)transform.position;
     }
 
 
@@ -67,12 +70,14 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void LookAtTarget()
     {
-        Vector3 targetPosition = new Vector3(_target.position.x, _target.position.y, 0);
+        
+        Vector2 moveDerection = (Vector2)transform.position - _previousePos;
 
-        float angle = Mathf.Atan2(targetPosition.y - transform.position.y, targetPosition.x - transform.position.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(moveDerection.y, moveDerection.x) * Mathf.Rad2Deg;
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+        _previousePos = transform.position;
     }
 
 
