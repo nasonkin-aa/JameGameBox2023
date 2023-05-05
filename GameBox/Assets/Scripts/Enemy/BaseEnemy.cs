@@ -5,6 +5,7 @@ public class BaseEnemy : MonoBehaviour
 {
     protected enum States // Удалить лишнее и расширить в дочернем классе
     {
+        Inactive,
         Attacking,
         Moving,
         Turns,
@@ -25,7 +26,9 @@ public class BaseEnemy : MonoBehaviour
     [SerializeField]
     protected float _damage = 10;
 
+    [SerializeField]
     protected States _state = States.Attacking;
+
     protected Rigidbody2D _rb;
     protected Collider2D _targetCollider;
     protected Character _characterScript;
