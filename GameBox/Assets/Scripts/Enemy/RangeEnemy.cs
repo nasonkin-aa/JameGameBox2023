@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-public class RangeEnemy : EnemyBase
+
+public class RangeEnemy : MovingEnemy
 {
     [SerializeField]
     protected GameObject _projectileSpawnPoint;

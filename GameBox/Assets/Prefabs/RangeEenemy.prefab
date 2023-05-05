@@ -122,7 +122,6 @@ GameObject:
   - component: {fileID: 2935467196686733072}
   - component: {fileID: 3602850381205719226}
   - component: {fileID: 8079721111766974573}
-  - component: {fileID: 8786704742619257529}
   - component: {fileID: 8054737763413890275}
   m_Layer: 0
   m_Name: RangeEenemy
@@ -272,25 +271,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8786704742619257529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2795161093277828643}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd516164dbc92744dbb40218d69eff7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _target: {fileID: 0}
-  _speed: 5
-  _attackCollider: {fileID: 2379886967265216696}
-  _attackkDistance: 1
-  _rotationSpeed: 180
-  _hp: 1
-  _damage: 10
 --- !u!114 &8054737763413890275
 MonoBehaviour:
   m_ObjectHideFlags: 0
