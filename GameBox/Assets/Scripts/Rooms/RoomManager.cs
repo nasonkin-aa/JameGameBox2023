@@ -6,13 +6,23 @@ using UnityEngine.Serialization;
 public class RoomManager: MonoBehaviour
 {
     public GameObject[] rooms;
-
-    private GameObject _currRoom;
+    
     private float _screenTop;
     private float _screenLeft;
     private float _screenRight;
     
+    private GameObject _currRoom;
+    
     public static RoomManager Instance { get; private set; }
+
+
+    private void FixedUpdate()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            DestroyRoom();
+        }
+    }
 
     private void Awake()
     {
@@ -38,18 +48,21 @@ public class RoomManager: MonoBehaviour
         
         var room = rooms[index - 1];
         var roomSize = room.GetComponent<SpriteRenderer>().bounds.size;
-        
         var spawnPoint = GetSpawnPoint(roomSize.x, roomSize.y);
         
         _currRoom = Instantiate(room, spawnPoint , Quaternion.identity);
-        StartCoroutine(MoveRoom());
+        
+        var targetPosition = new Vector2(spawnPoint.x, spawnPoint.y - 2f);
+        StartCoroutine(MoveRoom(targetPosition));
     }
     
     public void DestroyRoom()
     {
         if (_currRoom != null)
         {
-            Destroy(_currRoom);
+            var roomSize = _currRoom.GetComponent<SpriteRenderer>().bounds.size;
+            var targetPosition = GetSpawnPoint(roomSize.x, roomSize.y);
+            StartCoroutine(MoveRoom(targetPosition, () => Destroy(_currRoom)));
         }
     }
     
@@ -61,17 +74,17 @@ public class RoomManager: MonoBehaviour
         return new Vector2(spawnX, spawnY);
     }
     
-    private IEnumerator MoveRoom()
+    private IEnumerator MoveRoom(Vector2 targetPosition, Action action = null)
     {
-        var roomSize = _currRoom.GetComponent<SpriteRenderer>().bounds.size;
         var currPosition = _currRoom.transform.position;
-        var targetPosition = new Vector3(currPosition.x, _screenTop + roomSize.y / 2 - 1f, 0);
 
-        while (currPosition.y > targetPosition.y)
+        while (currPosition.y != targetPosition.y)
         {
             currPosition = _currRoom.transform.position;
-            _currRoom.transform.position = Vector3.MoveTowards(currPosition, targetPosition, 1f * Time.deltaTime);
+            _currRoom.transform.position = Vector2.MoveTowards(currPosition, targetPosition, 1f * Time.deltaTime);
             yield return null;
         }
+
+        action?.Invoke();
     }
 }

@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class TaskWheel: MonoBehaviour
 {
-    private const float Damping = 0.25f;
+    private const float Damping = 0.35f;
     
-    private const float MinSpinSpeed = 5.0f;
+    private const float MinSpinSpeed = 40.0f;
     
     private float _speed;
 
@@ -17,7 +17,7 @@ public class TaskWheel: MonoBehaviour
     public void Spin()
     {
         _taskWasGet = false;
-        _speed = new System.Random().Next(250, 350);
+        _speed = new System.Random().Next(350, 550);
     }
 
     private void TurnTheWheel()
