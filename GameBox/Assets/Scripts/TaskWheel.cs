@@ -51,7 +51,7 @@ public class TaskWheel: MonoBehaviour
                 var taskIndex = GetTaskIndex(transform.eulerAngles.z);
                 print(taskIndex);
                 
-                Level.Instance.Spawn(taskIndex);
+                RoomManager.Instance.SpawnRoom(taskIndex);
                 _taskWasGet = true;
             }
         }

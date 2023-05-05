@@ -313,8 +313,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1341406141}
-  - component: {fileID: 1341406140}
-  - component: {fileID: 1341406139}
+  - component: {fileID: 1341406142}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -322,38 +321,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1341406139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1341406138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 224af6a1bd41d3046acff6d6611129cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1341406140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1341406138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21228f98491980645b446ff0e159b370, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Levels:
-  - {fileID: 5723433944129337587, guid: bd2064a0ccf054563bfe2d7bdd5a5639, type: 3}
-  - {fileID: 1720634059316014743, guid: 02270c4da79fe49dfaca6f18ecd20ea4, type: 3}
-  - {fileID: 4606968317058884748, guid: 6e4c090a76ab1d84c9212c83e2b8750b, type: 3}
-  - {fileID: 1403980067261026669, guid: 7b365deaec122804eb14360fd25b10a7, type: 3}
-  - {fileID: 1403980067261026669, guid: 7b365deaec122804eb14360fd25b10a7, type: 3}
-  - {fileID: 1403980067261026669, guid: 7b365deaec122804eb14360fd25b10a7, type: 3}
-  - {fileID: 1403980067261026669, guid: 7b365deaec122804eb14360fd25b10a7, type: 3}
 --- !u!4 &1341406141
 Transform:
   m_ObjectHideFlags: 0
@@ -369,6 +336,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1341406142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341406138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85eec79a78b244938b1f3d28ba47d01a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rooms:
+  - {fileID: 5723433944129337587, guid: bd2064a0ccf054563bfe2d7bdd5a5639, type: 3}
+  - {fileID: 1720634059316014743, guid: 02270c4da79fe49dfaca6f18ecd20ea4, type: 3}
+  - {fileID: 4606968317058884748, guid: 6e4c090a76ab1d84c9212c83e2b8750b, type: 3}
+  - {fileID: 1403980067261026669, guid: 7b365deaec122804eb14360fd25b10a7, type: 3}
+  - {fileID: 1403980067261026669, guid: 7b365deaec122804eb14360fd25b10a7, type: 3}
+  - {fileID: 1403980067261026669, guid: 7b365deaec122804eb14360fd25b10a7, type: 3}
+  - {fileID: 1403980067261026669, guid: 7b365deaec122804eb14360fd25b10a7, type: 3}
 --- !u!1 &1409012892
 GameObject:
   m_ObjectHideFlags: 0
