@@ -1150,14 +1150,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CarAndBall
       objectReference: {fileID: 0}
-    - target: {fileID: 2160212246233039085, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
-      propertyPath: m_CallbackLayers.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 2160212246233039085, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
-      propertyPath: m_ContactCaptureLayers.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
     - target: {fileID: 2570625092370310917, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -1201,34 +1193,6 @@ PrefabInstance:
     - target: {fileID: 2570625092370310917, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4300339321352636993, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7449349556467665165, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
-      propertyPath: m_Mass
-      value: 100000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7449349556467665165, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7449349556467665165, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
-      propertyPath: m_LinearDrag
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7449349556467665165, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
-      propertyPath: m_AngularDrag
-      value: 100000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7847640054004916577, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7895583225297053368, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
-      propertyPath: m_ForceSendLayers.m_Bits
-      value: 1975
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
