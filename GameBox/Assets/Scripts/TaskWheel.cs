@@ -48,8 +48,10 @@ public class TaskWheel: MonoBehaviour
         {
             if (!_taskWasGet)
             {
-                print(transform.eulerAngles.z);
-                print( GetTaskIndex(transform.eulerAngles.z));
+                var taskIndex = GetTaskIndex(transform.eulerAngles.z);
+                print(taskIndex);
+                
+                Level.Instance.Spawn(taskIndex);
                 _taskWasGet = true;
             }
         }
