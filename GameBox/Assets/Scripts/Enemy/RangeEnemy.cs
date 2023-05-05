@@ -34,6 +34,7 @@ public class RangeEnemy : MovingEnemy
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         GameObject bullet = Instantiate(_projectile, _projectilePoint.position, Quaternion.Euler(new Vector3(0, 0, angle)));
 
-        bullet.GetComponent<Rigidbody2D>().velocity = direction.normalized * _bulletSpeed;
+        bullet.GetComponent<Projectile>().SetDamage = _damage;
+        bullet.GetComponent<Projectile>().SetVelocity = direction.normalized * _bulletSpeed;
     }
 }

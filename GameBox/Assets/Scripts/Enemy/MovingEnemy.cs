@@ -14,10 +14,11 @@ public class MovingEnemy : BaseEnemy
 
     protected NavMeshAgent agent;
     protected Vector2 _previousePos;
-
+    protected int _layerMask;
 
     public override void GetDamage(float damage)
     {
+        Debug.Log("Враг получил урон");
         _hp -= damage;
         if (_hp <= 0 && _state != States.Dead)
             StartCoroutine(Die());
@@ -25,6 +26,7 @@ public class MovingEnemy : BaseEnemy
     protected override void Start()
     {
         base.Start();
+        _layerMask = (1 << LayerMask.NameToLayer("Player")) | (1 << LayerMask.NameToLayer("Walls"));
         _state = States.Moving;
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -35,13 +37,13 @@ public class MovingEnemy : BaseEnemy
 
     protected override void Update()
     {
-        //if (_state == States.Moving)
-        //    LookAtTarget(_rotationSpeed, _previousePos); // При движении
+
     }
 
     protected override void FixedUpdate()
     {
-        StateMachine();
+        if (_state != States.Dead)
+            StateMachine();
     }
 
     protected virtual void MoveToTarget()
@@ -61,33 +63,27 @@ public class MovingEnemy : BaseEnemy
     protected override IEnumerator Attack()
     {
         yield return new WaitForSeconds(1); // под анмации
+        
+        if (_state == States.Dead)
+            yield break;
 
         if (_attackCollider.IsTouching(_targetCollider))
         {
             DealDamage();
         }
+
+        if (_state == States.Dead)
+            yield break;
         _state = States.Moving;
     }
 
     protected virtual void StateMachine()
     {
-        //if (_state == States.Moving)
-        //    MoveToTarget();
-
-        //if (_state != States.Attacking && DetectTarget())
-        //{
-        //    LookAtTarget(_rotationSpeed * 100, transform.position, _target.position); // костыль, резкий поворот // Стоя на месте
-        //    _state = States.Attacking;
-        //    agent.speed = 0;
-        //    StartCoroutine(Attack());
-        //}
-
-        if (_state == States.Attacking)
+        if (_state == States.Attacking || _state == States.Dead)
             return;
 
         if (DetectTarget())
         {
-            Debug.Log(Quaternion.Angle(TakeRotationTo(transform.position, _target.position), transform.rotation));
             if (Mathf.Abs(Quaternion.Angle(TakeRotationTo(transform.position, _target.position), transform.rotation)) > 5)
             {
                 
@@ -100,6 +96,7 @@ public class MovingEnemy : BaseEnemy
                 _state = States.Attacking;
                 agent.speed = 0;
                 StartCoroutine(Attack());
+                return;
             }
         } 
         else 
@@ -114,23 +111,24 @@ public class MovingEnemy : BaseEnemy
 
     protected override IEnumerator Die()
     {
+        Debug.Log("Враг умер");
         gameObject.GetComponent<Collider2D>().enabled = false;
-        StopCoroutine(Attack()); /// нАдо ли, а вдруг пригодится
         _state = States.Dead;
+        agent.speed = 0;
+        //StopCoroutine(Attack()); /// нАдо ли, а вдруг пригодится
+        
 
         yield return new WaitForSeconds(1); // под анмации      
     }
 
     protected virtual bool DetectTarget()
     {
-        List<RaycastHit2D> resultsOfHit = new List<RaycastHit2D>();
-        Vector2 targetDirection = (_target.position - transform.position).normalized;
+        Vector2 targetDirection = TakeDirection(transform.position, _target.position);
 
-        int numberOfHits = Physics2D.Raycast(transform.position, targetDirection, new ContactFilter2D().NoFilter(), resultsOfHit, _attackkDistance);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDirection, _attackkDistance, _layerMask);
         Debug.DrawLine(transform.position, (Vector2)transform.position + targetDirection * _attackkDistance, Color.red);
 
-        // Проверяем, попал ли луч в объект
-        if (resultsOfHit.Any(hit => hit.transform == _target && !resultsOfHit.Any(hit => hit.transform.tag == "Wall")))
+        if (hit.transform == _target.transform)
         {
             return true;
         }
@@ -139,14 +137,14 @@ public class MovingEnemy : BaseEnemy
 
     protected Vector2 TakeDirection (Vector2 point1, Vector2 point2)
     {
-        return point2 - point1;
+        return (point2 - point1).normalized;
     }
 
     protected Quaternion TakeRotationTo (Vector2 from, Vector2 to)
     {
-        Vector2 targetDerection = TakeDirection(to, from);
+        Vector2 targetDirection = TakeDirection(from, to);
 
-        float angle = Mathf.Atan2(targetDerection.y, targetDerection.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
         return Quaternion.Euler(new Vector3(0, 0, angle));
     }
 }

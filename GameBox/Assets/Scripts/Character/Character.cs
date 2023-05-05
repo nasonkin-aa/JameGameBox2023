@@ -16,7 +16,7 @@ public class Character : MonoBehaviour
 
     public virtual void GetDamage(float damage)
     {
-        Debug.Log("Получен урон");
+        //Debug.Log("Получен урон");
         _hp -= damage;
         if (_hp <= 0)
             StartCoroutine(Die());
@@ -77,7 +77,7 @@ public class Character : MonoBehaviour
     protected virtual IEnumerator Die()
     {
         //StopCoroutine(); /// нАдо ли, а вдруг пригодится
-        Debug.Log("Персонаж умер, увы");
+        //Debug.Log("Персонаж умер, увы");
 
         yield return new WaitForSeconds(1); // под анмации      
     }

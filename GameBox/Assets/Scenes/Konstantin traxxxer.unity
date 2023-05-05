@@ -1467,6 +1467,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -253914806437628022, guid: 4b3f2ee45b500db42b2fd4e80faa6b61, type: 3}
+      propertyPath: _target
+      value: 
+      objectReference: {fileID: 325340516}
     - target: {fileID: 739553795256875131, guid: 4b3f2ee45b500db42b2fd4e80faa6b61, type: 3}
       propertyPath: m_BodyType
       value: 1
@@ -1641,14 +1645,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8079721111766974573, guid: afddcb10fe0ab2947b820646fe67fcb2, type: 3}
       propertyPath: m_Constraints
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8786704742619257529, guid: afddcb10fe0ab2947b820646fe67fcb2, type: 3}
-      propertyPath: _target
-      value: 
-      objectReference: {fileID: 325340516}
-    - target: {fileID: 8786704742619257529, guid: afddcb10fe0ab2947b820646fe67fcb2, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
