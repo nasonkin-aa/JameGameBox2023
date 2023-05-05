@@ -48,7 +48,7 @@ public class RandomTraps : MonoBehaviour
             yield return new WaitForSeconds(2f);
             SpawnTraps(WarningsPos);
 
-            yield return new WaitForSeconds(spawnInterval - 3f);
+            yield return new WaitForSeconds(spawnInterval );
         }
     }
 

@@ -8,9 +8,11 @@ public class TowerBehavior : MonoBehaviour
     public float fireRate = 1f; // скорость стрельбы турели (выстрелов в секунду)
     public GameObject bulletPrefab; // префаб снаряда
     public Transform bulletSpawnPoint; // точка, откуда будут появляться снаряды
+    public GameObject Warning;
 
     private Transform heroTransform; // ссылка на героя
     private float nextFireTime; // время, когда турель сможет произвести следующий выстрел
+
     private void Start()
     {
         heroTransform = GameObject.FindObjectOfType<Character>().transform; // ищем героя в сцене по тегу
@@ -32,9 +34,18 @@ public class TowerBehavior : MonoBehaviour
             bulletSpawnPoint.up = heroTransform.position - transform.position;
 
             // создаем новый снаряд
-            Shoot(heroTransform.position);
+            GameObject gameObject =  Instantiate(Warning, heroTransform.position,Quaternion.identity);
+            Destroy(gameObject,2f);
+            StartCoroutine(ShootAfterDelay(heroTransform.position));
+            //Shoot(heroTransform.position);
             nextFireTime = Time.time + 1f / fireRate;
         }
+    }
+
+    private IEnumerator ShootAfterDelay(Vector3 targetPosition)
+    {
+        yield return new WaitForSeconds(1.5f); // задержка в две секунды
+        Shoot(targetPosition);
     }
 
     protected virtual void Shoot(Vector3 distance )

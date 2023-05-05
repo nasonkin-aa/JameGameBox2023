@@ -77,7 +77,7 @@ public class Character : MonoBehaviour
     protected virtual IEnumerator Die()
     {
         //StopCoroutine(); /// нјдо ли, а вдруг пригодитс€
-        //Debug.Log("ѕерсонаж умер, увы");
+        Debug.Log("ѕерсонаж умер, увы");
 
         yield return new WaitForSeconds(1); // под анмации      
     }

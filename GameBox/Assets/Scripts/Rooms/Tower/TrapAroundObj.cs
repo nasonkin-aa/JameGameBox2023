@@ -36,11 +36,11 @@ public class TrapAroundObj : MonoBehaviour
         // Создаем луч, направленный в заданном направлении
 
             Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction);
+            //RaycastHit2D hit = Physics2D.Raycast(transform.position, direction);
 
             // Если луч сталкивается с коллайдером границ объекта, спавним объект
-            if (hit.collider == coll)
-            {
+/*            if (hit.collider == coll)
+            {*/
                 // Вычисляем позицию для спавна объекта
                 Vector2 spawnPosition = (Vector2)transform.position + direction * spawnDistance;
 
@@ -52,7 +52,7 @@ public class TrapAroundObj : MonoBehaviour
                 spearList.Add( newObject );
                 // Делаем новый объект дочерним для текущего объекта
                 newObject.transform.parent = transform;
-            }
+            //}
         }
                 StartCoroutine(ObjectAnimation(spearList));
     }

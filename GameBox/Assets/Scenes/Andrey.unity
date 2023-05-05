@@ -2020,6 +2020,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tower1
       objectReference: {fileID: 0}
+    - target: {fileID: 5355516217359482505, guid: cb4a5654f3671184f975acd2a8fc7ee5, type: 3}
+      propertyPath: Warning
+      value: 
+      objectReference: {fileID: 4893631213651155034, guid: 1e2924d3aa64c22408fc34e4792057ed, type: 3}
+    - target: {fileID: 5355516217359482505, guid: cb4a5654f3671184f975acd2a8fc7ee5, type: 3}
+      propertyPath: fireRate
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6793658285038836998, guid: cb4a5654f3671184f975acd2a8fc7ee5, type: 3}
       propertyPath: m_RootOrder
       value: 4
