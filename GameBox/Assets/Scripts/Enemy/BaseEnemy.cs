@@ -68,6 +68,7 @@ public class BaseEnemy : MonoBehaviour
     }
     protected virtual IEnumerator Die()
     {
+        Debug.Log("ебанись");
         gameObject.GetComponent<Collider2D>().enabled = false;
         StopCoroutine(Attack()); /// нјдо ли, а вдруг пригодитс€
 
@@ -78,4 +79,6 @@ public class BaseEnemy : MonoBehaviour
     {
         _characterScript.GetDamage(_damage);
     }
+
+
 }
