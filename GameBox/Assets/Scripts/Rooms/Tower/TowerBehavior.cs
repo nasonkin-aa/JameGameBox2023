@@ -29,13 +29,14 @@ public class TowerBehavior : MonoBehaviour
         if (distance <= radius && Time.time >= nextFireTime)
         {
             // нацеливаем турель на героя
-            transform.GetChild(0).up = heroTransform.position - transform.position;
+            bulletSpawnPoint.up = heroTransform.position - transform.position;
 
             // создаем новый снаряд
+
             GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
 
             // задаем направление движения снаряда
-            bullet.GetComponent<Rigidbody2D>().velocity = transform.up * bullet.GetComponent<BulletBehavior>().speed;
+            bullet.GetComponent<Rigidbody2D>().velocity = bulletSpawnPoint.up * bullet.GetComponent<BulletBehavior>().speed;
 
             // устанавливаем время следующего выстрела
             nextFireTime = Time.time + 1f / fireRate;
