@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,39 +7,20 @@ using UnityEngine;
 public class PickUpZone : MonoBehaviour
 {
     private bool isBeingCarried = false; // флаг, указывающий на то, что объект взят
+    private bool throwBlock = false;
+    public GameObject Ball; 
     private Rigidbody2D rbBall; // ссылка на Rigidbody объекта, который будет перемещаться
     public float pushSpeed = 10f;
     public GameObject Char;
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.GetComponent<ChainBall>() && Input.GetMouseButton(0)) 
-        {
-            Debug.Log("isball");
-            rbBall = collision.GetComponent<Rigidbody2D>();
-            isBeingCarried = true;
-            if (Input.GetMouseButton(1))
-            {
-                Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                Vector2 direction = mousePosition - (Vector2)collision.transform.position;
-                direction.Normalize();
-                collision.GetComponent<Rigidbody2D>().velocity = direction * pushSpeed;
-                //Char.GetComponent<Rigidbody2D>().velocity = direction * pushSpeed;
-                /*Vector2 charDirection = mousePosition - (Vector2)Char.transform.position;
-                charDirection.Normalize();
-                Char.GetComponent<Rigidbody2D>().MovePosition((Vector2)Char.transform.position + charDirection * pushSpeed);*/
-               /* direction = mousePosition - (Vector2)Char.transform.position;
-                direction.Normalize();*/
-                StartCoroutine(MoveCharacter(Char.transform.position + (collision.transform.position  - Char.transform.position) * 3 ));
+    private Character _characterScript;
+    protected Coroutine threw;
 
-                isBeingCarried = false;
-            }
-        }
-        else
-        {
-            isBeingCarried = false;
-        }
-        
+    void Start ()
+    {
+        rbBall = Ball.GetComponent<Rigidbody2D>();
+        _characterScript = Char.GetComponent<Character>();
     }
+
     IEnumerator MoveCharacter(Vector2 targetPosition)
     {
         float time = 0f;
@@ -47,17 +29,43 @@ public class PickUpZone : MonoBehaviour
         while (time < 1f)
         {
             time += Time.deltaTime * 5 ;
-            Char.transform.position = Vector3.Lerp(startPosition, targetPosition, time);
-            yield return null;
+            //Char.transform.position = Vector3.Lerp(startPosition, targetPosition, time);
+            Char.transform.position = Vector3.Lerp(startPosition, Ball.transform.position, time);
+            yield return new WaitForSeconds(0.01f);
+        }
+        Debug.Log("123123");
+        _characterScript.IsMovingBlock = false;
+    }
+    private void FixedUpdate()
+    {
+        if (Input.GetMouseButton(0) && transform.GetComponent<Collider2D>().IsTouchingLayers())
+            isBeingCarried = true;
+        else
+            isBeingCarried = false;
+
+        if (isBeingCarried)
+        {
+            if (!throwBlock) // если объект взят
+                Ball.transform.position = transform.position;
+            if (Input.GetMouseButton(1) && !throwBlock)
+                ThrowBall();
         }
     }
-    private void Update()
+
+    private void ThrowBall()
     {
-        if (isBeingCarried) // если объект взят
-        {
-            Debug.Log("2");
-            Vector3 newPosition = transform.position; // вычисляем новую позицию объекта
-            rbBall.MovePosition(newPosition); // перемещаем объект
-        }
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direction = (mousePosition - (Vector2)Ball.transform.position).normalized;
+        rbBall.velocity = direction * pushSpeed;
+        StartCoroutine(ThrowBlocking());
+        _characterScript.IsMovingBlock = true;
+        StartCoroutine(MoveCharacter(Char.transform.position + (transform.position - Char.transform.position).normalized * 3));
+    }
+
+    private IEnumerator ThrowBlocking()
+    {
+        throwBlock = true;
+        yield return new WaitForSeconds(0.9f);
+        throwBlock = false;
     }
 }

@@ -218,10 +218,10 @@ BoxCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 1975
+    m_Bits: 2147483647
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 1975
+    m_Bits: 2147483647
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -288,6 +288,7 @@ MonoBehaviour:
   _attackkDistance: 1.5
   _hp: 1
   _damage: 10
+  _state: 1
   _speed: 5
   _rotationSpeed: 180
 --- !u!195 &7896903610716549317

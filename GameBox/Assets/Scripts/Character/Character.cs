@@ -13,6 +13,13 @@ public class Character : MonoBehaviour
     public float speedChar = 5f;
 
     public  Rigidbody2D rbChar;
+    protected bool _isMovingBlock = false;
+
+    public bool IsMovingBlock 
+    {
+        get { return _isMovingBlock; }
+        set { _isMovingBlock = !_isMovingBlock; }
+    }
 
     public virtual void GetDamage(float damage)
     {
@@ -29,13 +36,16 @@ public class Character : MonoBehaviour
     }
     private void Update()
     {
-      
-        LookAt();
+        if (!_isMovingBlock)
+            LookAt();
 
     }
     private void FixedUpdate()
     {
-        PlayerControler();
+        if (!_isMovingBlock)
+            PlayerControler();
+        else
+            rbChar.velocity = Vector2.zero;
     }
     private void PlayerControler()
     {
@@ -80,5 +90,18 @@ public class Character : MonoBehaviour
         Debug.Log("Персонаж умер, увы");
 
         yield return new WaitForSeconds(1); // под анмации      
+    }
+
+    protected Vector2 TakeDirection(Vector2 point1, Vector2 point2)
+    {
+        return (point2 - point1).normalized;
+    }
+
+    protected Quaternion TakeRotationTo(Vector2 from, Vector2 to)
+    {
+        Vector2 targetDirection = TakeDirection(from, to);
+
+        float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
+        return Quaternion.Euler(new Vector3(0, 0, angle));
     }
 }
