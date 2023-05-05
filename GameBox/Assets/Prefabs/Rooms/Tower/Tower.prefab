@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c2a9c98c5da96c43a16b8edcaa32781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 5
+  radius: 10
   fireRate: 1
   bulletPrefab: {fileID: 3051040358989244190, guid: 46d641f282b3a0c4a96ef856ce95b050, type: 3}
   bulletSpawnPoint: {fileID: 8153485784142093444}

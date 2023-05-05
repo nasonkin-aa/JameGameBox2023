@@ -32,14 +32,15 @@ public class TowerBehavior : MonoBehaviour
             bulletSpawnPoint.up = heroTransform.position - transform.position;
 
             // создаем новый снаряд
-
-            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-
-            // задаем направление движения снаряда
-            bullet.GetComponent<Rigidbody2D>().velocity = bulletSpawnPoint.up * bullet.GetComponent<BulletBehavior>().speed;
-
-            // устанавливаем время следующего выстрела
+            Shoot(heroTransform.position);
             nextFireTime = Time.time + 1f / fireRate;
         }
+    }
+
+    protected virtual void Shoot(Vector3 distance )
+    {
+        float angle = Mathf.Atan2(distance.y, distance.x) * Mathf.Rad2Deg;
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
+        bullet.GetComponent<BulletBehavior>().target = distance;
     }
 }
