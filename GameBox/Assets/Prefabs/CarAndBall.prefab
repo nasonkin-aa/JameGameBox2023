@@ -61,7 +61,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2458743124084841692}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.8541417, y: 1.2489067, z: 9.95293}
+  m_LocalPosition: {x: -4.8541417, y: 1.2489067, z: 10}
   m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -179,7 +179,7 @@ CircleCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 1911
+    m_Bits: 1975
   m_ForceReceiveLayers:
     serializedVersion: 2
     m_Bits: 1911
@@ -224,7 +224,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6452190590598100605}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -4.8741417, y: 3.448907, z: 9.95293}
+  m_LocalPosition: {x: -4.8741417, y: 3.448907, z: 10}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -311,9 +311,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1000000
-  m_LinearDrag: 1000000
-  m_AngularDrag: 1000000
+  m_Mass: 100000
+  m_LinearDrag: 0
+  m_AngularDrag: 100000
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -436,10 +436,10 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_ContactCaptureLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 512
   m_CallbackLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 512
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
