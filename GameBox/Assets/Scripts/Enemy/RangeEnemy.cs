@@ -29,8 +29,6 @@ public class RangeEnemy : MovingEnemy
 
     protected virtual void Shoot(Vector3 direction)
     {
-        //Debug.Log("Shoot");
-
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         GameObject bullet = Instantiate(_projectile, _projectilePoint.position, Quaternion.Euler(new Vector3(0, 0, angle)));
 

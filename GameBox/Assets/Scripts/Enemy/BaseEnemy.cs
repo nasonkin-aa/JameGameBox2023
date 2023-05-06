@@ -21,18 +21,21 @@ public class BaseEnemy : MonoBehaviour
     protected float _attackkDistance = 1f;
 
     [SerializeField]
-    protected float _hp = 1;
+    protected float _hp = 1f;
 
     [SerializeField]
-    protected float _damage = 10;
+    protected float _damage = 10f;
 
     [SerializeField]
-    protected States _state = States.Attacking;
+    protected States _state = States.Moving;
+
+    [SerializeField]
+    protected Aggression _aggressionEvent;
+
 
     protected Rigidbody2D _rb;
     protected Collider2D _targetCollider;
     protected Character _characterScript;
-
     public virtual void GetDamage(float damage)
     {
         _hp -= damage;
@@ -48,6 +51,12 @@ public class BaseEnemy : MonoBehaviour
             _target.GetComponent<Character>() != null ?
             _target.GetComponent<Character>() :
             _target.gameObject.AddComponent<Character>();
+
+        if (_state == States.Inactive)
+        {
+            _aggressionEvent = GetComponentInChildren<Aggression>();
+            _aggressionEvent.OnAggressionEnter.AddListener(OnAggressionEnter);
+        }
     }
 
     protected virtual void Update()
@@ -57,7 +66,8 @@ public class BaseEnemy : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        
+        if (_state == States.Inactive)
+            return;
     }
 
     protected virtual IEnumerator Attack()
@@ -71,7 +81,6 @@ public class BaseEnemy : MonoBehaviour
     }
     protected virtual IEnumerator Die()
     {
-        Debug.Log("ебанись");
         gameObject.GetComponent<Collider2D>().enabled = false;
         StopCoroutine(Attack()); /// нјдо ли, а вдруг пригодитс€
 
@@ -83,5 +92,9 @@ public class BaseEnemy : MonoBehaviour
         _characterScript.GetDamage(_damage);
     }
 
-
+    public void OnAggressionEnter()
+    {
+        _state = States.Moving;
+        _aggressionEvent.OnAggressionEnter.RemoveListener(OnAggressionEnter);
+    }
 }

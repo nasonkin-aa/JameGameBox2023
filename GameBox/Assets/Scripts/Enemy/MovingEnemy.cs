@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using System.Linq;
 
 public class MovingEnemy : BaseEnemy
 {
@@ -18,7 +16,6 @@ public class MovingEnemy : BaseEnemy
 
     public override void GetDamage(float damage)
     {
-        Debug.Log("Враг получил урон");
         _hp -= damage;
         if (_hp <= 0 && _state != States.Dead)
             StartCoroutine(Die());
@@ -27,7 +24,6 @@ public class MovingEnemy : BaseEnemy
     {
         base.Start();
         _layerMask = (1 << LayerMask.NameToLayer("Player")) | (1 << LayerMask.NameToLayer("Walls"));
-        _state = States.Moving;
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -42,6 +38,10 @@ public class MovingEnemy : BaseEnemy
 
     protected override void FixedUpdate()
     {
+        Debug.Log(_state);
+        if (_state == States.Inactive)
+            return;
+
         if (_state != States.Dead)
             StateMachine();
     }
@@ -111,7 +111,6 @@ public class MovingEnemy : BaseEnemy
 
     protected override IEnumerator Die()
     {
-        Debug.Log("Враг умер");
         gameObject.GetComponent<Collider2D>().enabled = false;
         _state = States.Dead;
         agent.speed = 0;
@@ -147,5 +146,6 @@ public class MovingEnemy : BaseEnemy
         float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
         return Quaternion.Euler(new Vector3(0, 0, angle));
     }
+
 }
 

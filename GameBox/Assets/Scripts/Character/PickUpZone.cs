@@ -29,11 +29,9 @@ public class PickUpZone : MonoBehaviour
         while (time < 1f)
         {
             time += Time.deltaTime * 5 ;
-            //Char.transform.position = Vector3.Lerp(startPosition, targetPosition, time);
             Char.transform.position = Vector3.Lerp(startPosition, Ball.transform.position, time);
             yield return new WaitForSeconds(0.01f);
         }
-        Debug.Log("123123");
         _characterScript.IsMovingBlock = false;
     }
     private void FixedUpdate()
