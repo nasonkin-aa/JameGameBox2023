@@ -6,8 +6,8 @@ public class Main : IRoomManagerBase
 
     [SerializeField]
     protected TaskWheel _wheel;
-
-    public GameObject _drone;
+    [SerializeField]
+    protected GameObject _drone;
 
     protected static bool _isRoomStarted = false;
 
@@ -37,7 +37,7 @@ public class Main : IRoomManagerBase
     {
         Debug.Log("lose");
         _isRoomStarted = false;
-        //Instantiate()
+        Instantiate(_drone, transform.position, transform.rotation);
         RemoveAllEvents(_newRoom);
     }
 
@@ -45,6 +45,7 @@ public class Main : IRoomManagerBase
     {
         Debug.Log("finish");
         _isRoomStarted = false;
+        Instantiate(_drone, transform.position, transform.rotation);
         RemoveAllEvents(_newRoom);
     }
 
@@ -52,6 +53,7 @@ public class Main : IRoomManagerBase
     {
         Debug.Log("die");
         _isRoomStarted = false;
+        Instantiate(_drone, transform.position, transform.rotation);
         RemoveAllEvents(_newRoom);
     }
 
@@ -67,19 +69,16 @@ public class Main : IRoomManagerBase
     public override void CharacterEnter(int targetCount)
     {
         Debug.Log("зашёл " + targetCount);
-        throw new System.NotImplementedException();
     }
 
     public override void CharacterEnter()
     {
         Debug.Log("зашёл просто");
-        throw new System.NotImplementedException();
     }
 
     public override void LevelProgress(int count)
     {
         Debug.Log("прогресс " + count);
-        throw new System.NotImplementedException();
     }
 
 
