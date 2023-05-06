@@ -32,10 +32,17 @@ public class TaskWheel: MonoBehaviour
     private int GetTaskIndex(float angle)
     {
         // кол-во заданий
-        var numberOfSections = 7;
+        var numberOfSections = 6;
         float angleOffset = 360 / numberOfSections;
 
-        return Mathf.CeilToInt(((angle + angleOffset / 2) / angleOffset));
+        var index = Mathf.CeilToInt(((angle + angleOffset / 2) / angleOffset));
+
+        if (index > numberOfSections)
+        {
+            return index - numberOfSections;
+        }
+
+        return index;
     }
     
     private void FixedUpdate()

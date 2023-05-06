@@ -25,8 +25,6 @@ public class RoomManager: MonoBehaviour
         { 
             Instance = this; 
         }
-        
-        SpawnRoom(1);
     }
 
     public void SpawnRoom(int index)
