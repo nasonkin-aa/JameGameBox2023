@@ -445,6 +445,42 @@ PrefabInstance:
       propertyPath: hub
       value: 
       objectReference: {fileID: 801797289}
+    - target: {fileID: 1317716407906530877, guid: d4c187f76e774554e944fee4356163be, type: 3}
+      propertyPath: rooms.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1317716407906530877, guid: d4c187f76e774554e944fee4356163be, type: 3}
+      propertyPath: rooms.Array.data[0]
+      value: 
+      objectReference: {fileID: 532212685326200104, guid: 6a25f810cce8f554d8f08c83f0550adb, type: 3}
+    - target: {fileID: 1317716407906530877, guid: d4c187f76e774554e944fee4356163be, type: 3}
+      propertyPath: rooms.Array.data[1]
+      value: 
+      objectReference: {fileID: 532212685326200104, guid: 6a25f810cce8f554d8f08c83f0550adb, type: 3}
+    - target: {fileID: 1317716407906530877, guid: d4c187f76e774554e944fee4356163be, type: 3}
+      propertyPath: rooms.Array.data[2]
+      value: 
+      objectReference: {fileID: 532212685326200104, guid: 6a25f810cce8f554d8f08c83f0550adb, type: 3}
+    - target: {fileID: 1317716407906530877, guid: d4c187f76e774554e944fee4356163be, type: 3}
+      propertyPath: rooms.Array.data[3]
+      value: 
+      objectReference: {fileID: 532212685326200104, guid: 6a25f810cce8f554d8f08c83f0550adb, type: 3}
+    - target: {fileID: 1317716407906530877, guid: d4c187f76e774554e944fee4356163be, type: 3}
+      propertyPath: rooms.Array.data[4]
+      value: 
+      objectReference: {fileID: 532212685326200104, guid: 6a25f810cce8f554d8f08c83f0550adb, type: 3}
+    - target: {fileID: 1317716407906530877, guid: d4c187f76e774554e944fee4356163be, type: 3}
+      propertyPath: rooms.Array.data[5]
+      value: 
+      objectReference: {fileID: 532212685326200104, guid: 6a25f810cce8f554d8f08c83f0550adb, type: 3}
+    - target: {fileID: 1317716407906530877, guid: d4c187f76e774554e944fee4356163be, type: 3}
+      propertyPath: rooms.Array.data[6]
+      value: 
+      objectReference: {fileID: 532212685326200104, guid: 6a25f810cce8f554d8f08c83f0550adb, type: 3}
+    - target: {fileID: 1317716407906530877, guid: d4c187f76e774554e944fee4356163be, type: 3}
+      propertyPath: rooms.Array.data[7]
+      value: 
+      objectReference: {fileID: 532212685326200104, guid: 6a25f810cce8f554d8f08c83f0550adb, type: 3}
     - target: {fileID: 2858658175015039447, guid: d4c187f76e774554e944fee4356163be, type: 3}
       propertyPath: m_RootOrder
       value: 11

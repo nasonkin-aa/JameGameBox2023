@@ -15,39 +15,43 @@ public class RoomTower : IRoomManagerBase
         character = FindObjectOfType<Character>();
         
         character.OnDie.AddListener(CharacterDie);
-        Debug.Log(towerBehavior);
         towerBehavior.OnFinishLevel.AddListener(Finished);
 
     }
     public override void CharacterDie()
     {
-        character.OnDie.RemoveListener(CharacterDie);
+        Debug.Log("2");
         OnCharacterDie.Invoke();
+        character.OnDie.RemoveListener(CharacterDie);
     }
 
     public override void CharacterEnter(int targetCount)
     {
+        Debug.Log("3");
         OnStart.Invoke(CountToTarget);
     }
 
     public override void CharacterEnter()
     {
+        Debug.Log("4");
         OnStart.Invoke(CountToTarget);
     }
 
     public override void Failed()
     {
+        Debug.Log("5");
         OnLose.Invoke();
     }
 
     public override void Finished()
     {
-        towerBehavior.OnFinishLevel.RemoveListener(Finished);
+        Debug.Log("6");
         OnFinish.Invoke();
+        towerBehavior.OnFinishLevel.RemoveListener(Finished);
     }
 
     public override void LevelProgress(int count)
     {
-        throw new System.NotImplementedException();
+        OnLevelProgress.Invoke(count);
     }
 }

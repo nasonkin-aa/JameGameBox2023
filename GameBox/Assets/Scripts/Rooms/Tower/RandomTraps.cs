@@ -16,7 +16,6 @@ public class RandomTraps : MonoBehaviour
     private void Start()
     {
         spawnArea = GetComponent<Collider2D>();
-        Debug.Log(spawnArea);
         StartSpawning();
     }
     private void StartSpawning()

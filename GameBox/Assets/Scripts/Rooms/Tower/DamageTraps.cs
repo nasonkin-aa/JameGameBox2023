@@ -8,7 +8,6 @@ public class DamageTraps : MonoBehaviour
     {
         if (collision.GetComponent<Character>())
         {
-            Debug.Log("21");
             collision.GetComponent<Character>().GetDamage(1);
         }
     }

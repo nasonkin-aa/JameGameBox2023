@@ -214,7 +214,7 @@ MonoBehaviour:
   _attackkDistance: 5
   _hp: 1
   _damage: 10
-  _state: 2
+  _state: 0
   _aggressionEvent: {fileID: 0}
   _speed: 5
   _rotationSpeed: 180

@@ -2,43 +2,47 @@ using UnityEngine;
 
 public class Main : IRoomManagerBase
 {
-    private IRoomManagerBase _newRoom;
+    public IRoomManagerBase _newRoom;
 
     [SerializeField]
     protected TaskWheel _wheel;
     [SerializeField]
     protected GameObject _drone;
 
-    protected static bool _isRoomStarted = false;
+    protected bool _isRoomStarted = false;
 
 
     void Start()
     {
         _wheel.OnRoomCreate.AddListener(CreateRoom);
+        Debug.Log(_wheel);
     }
 
     public static void StartSpin ()
     {
         Debug.Log("spawn");
         TaskWheel.Spin();
-        _isRoomStarted = true;
     }
 
     public void CreateRoom(GameObject room)
     {
+        Debug.Log(room);
+        _isRoomStarted = true;
         _newRoom = room.GetComponentInChildren<IRoomManagerBase>();
+        Debug.Log(_newRoom);
         _newRoom.OnStart.AddListener(CharacterEnter);
         _newRoom.OnFinish.AddListener(Finished);
         _newRoom.OnCharacterDie.AddListener(CharacterDie);
         _newRoom.OnLevelProgress.AddListener(LevelProgress);
         _newRoom.OnLose.AddListener(Failed);
+
     }
 
     public override void Failed()
     {
         Debug.Log("lose");
         _isRoomStarted = false;
-        Instantiate(_drone, transform.position, transform.rotation);
+        Debug.Log(Instantiate(_drone, transform.position, transform.rotation));
         RemoveAllEvents(_newRoom);
     }
 
@@ -46,7 +50,7 @@ public class Main : IRoomManagerBase
     {
         Debug.Log("finish");
         _isRoomStarted = false;
-        Instantiate(_drone, transform.position, transform.rotation);
+        Debug.Log(Instantiate(_drone, transform.position, transform.rotation));
         RemoveAllEvents(_newRoom);
     }
 
@@ -54,7 +58,8 @@ public class Main : IRoomManagerBase
     {
         Debug.Log("die");
         _isRoomStarted = false;
-        Instantiate(_drone, transform.position, transform.rotation);
+        Debug.Log(Instantiate(_drone, transform.position, transform.rotation));
+
         RemoveAllEvents(_newRoom);
     }
 
@@ -70,16 +75,19 @@ public class Main : IRoomManagerBase
     public override void CharacterEnter(int targetCount)
     {
         Debug.Log("зашёл " + targetCount);
+        //Debug.Log(Instantiate(_drone, transform.position, transform.rotation));
     }
 
     public override void CharacterEnter()
     {
         Debug.Log("зашёл просто");
+        //Debug.Log(Instantiate(_drone, transform.position, transform.rotation));
     }
 
     public override void LevelProgress(int count)
     {
         Debug.Log("прогресс " + count);
+        //Debug.Log(Instantiate(_drone, transform.position, transform.rotation));
     }
 
 

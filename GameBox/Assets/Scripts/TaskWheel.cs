@@ -52,7 +52,6 @@ public class TaskWheel: MonoBehaviour
             if (!_taskWasGet)
             {
                 var taskIndex = GetTaskIndex(transform.eulerAngles.z);
-                print(taskIndex);
 
                 OnRoomCreate.Invoke(RoomManager.Instance.SpawnRoom(taskIndex));
                 _taskWasGet = true;

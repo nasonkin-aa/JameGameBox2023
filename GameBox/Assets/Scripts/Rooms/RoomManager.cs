@@ -33,7 +33,6 @@ public class RoomManager: MonoBehaviour
         
         var spawnPoint = GetSpawnPoint();
         _currRoom = Instantiate(room, spawnPoint, Quaternion.identity);
-        Debug.Log(12121212);
 
         // TODO: почему нахуй блять
         var newY = hub.transform.position.y + _hubComponent.bounds.extents.y - _currRoomComponent.bounds.extents.y;
