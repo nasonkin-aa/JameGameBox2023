@@ -24,6 +24,7 @@ public class PickUpZone : MonoBehaviour
         _characterScript = Char.GetComponent<Character>();
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     IEnumerator MoveCharacter(Vector2 targetPosition)
     {
         float time = 0f;
@@ -32,7 +33,8 @@ public class PickUpZone : MonoBehaviour
         while (time < 1f)
         {
             time += Time.deltaTime * 10 ;
-            Char.transform.position = Vector3.Lerp(startPosition, Ball.transform.position, time);
+            //Char.transform.position = Vector3.Lerp(startPosition, Ball.transform.position, time);
+            Char.GetComponent<Rigidbody2D>().position = Vector3.Lerp(startPosition, Ball.transform.position, time);
             yield return new WaitForSeconds(0.01f);
         }
         _characterScript.IsMovingBlock = false;

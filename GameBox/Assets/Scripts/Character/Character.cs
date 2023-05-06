@@ -6,6 +6,9 @@ using UnityEngine.Events;
 
 public class Character : MonoBehaviour
 {
+
+    public Sprite pickBall;
+    public Sprite stand;
     public static GameObject TargetGameObject;
 
     public UnityEvent OnDie;
@@ -16,11 +19,11 @@ public class Character : MonoBehaviour
 
     [SerializeField]
     [Range(0f, 1f)]
-    protected float _slowÑoefficient = 0.3f;
+    protected float _slowï¿½oefficient = 0.3f;
 
     [SerializeField]
     [Range(3f, 20f)]
-    protected float _defaultSpeed = 5f;
+    public float _defaultSpeed = 5f;
 
     private Vector3 _mousePos;
     protected float _speedChar;
@@ -127,11 +130,13 @@ public class Character : MonoBehaviour
 
     public void OnBallPickUped()
     {
-        _speedChar = _defaultSpeed * _slowÑoefficient;
+        gameObject.GetComponent<SpriteRenderer>().sprite = pickBall;
+        _speedChar = _defaultSpeed * _slowcoefficient;
     }
 
     public void OnBallDropped()
     {
+        gameObject.GetComponent<SpriteRenderer>().sprite = stand;
         _speedChar = _defaultSpeed;
     }
 
