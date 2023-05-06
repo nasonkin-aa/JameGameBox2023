@@ -19,6 +19,7 @@ public class Main : IRoomManagerBase
 
     public static void StartSpin ()
     {
+        Debug.Log("spawn");
         TaskWheel.Spin();
         _isRoomStarted = true;
     }

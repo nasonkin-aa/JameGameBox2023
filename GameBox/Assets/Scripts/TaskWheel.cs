@@ -12,7 +12,7 @@ public class TaskWheel: MonoBehaviour
 
     private float _spinAngle;
 
-    static bool _taskWasGet;
+    static bool _taskWasGet = true;
     private bool IsSpinningAvailable => _speed >= MinSpinSpeed;
 
     public UnityEvent<GameObject> OnRoomCreate;
