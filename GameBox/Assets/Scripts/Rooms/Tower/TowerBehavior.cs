@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TowerBehavior : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class TowerBehavior : MonoBehaviour
     public GameObject bulletPrefab; // префаб снаряда
     public Transform bulletSpawnPoint; // точка, откуда будут появляться снаряды
     public GameObject Warning;
+    
+    public UnityEvent OnFinishLevel;
+
 
     private Transform heroTransform; // ссылка на героя
     private float nextFireTime; // время, когда турель сможет произвести следующий выстрел
@@ -19,11 +23,16 @@ public class TowerBehavior : MonoBehaviour
         heroTransform = GameObject.FindObjectOfType<Character>().transform; // ищем героя в сцене по тегу
     }
 
+    public void Die()
+    {
+        OnFinishLevel.Invoke();
+        Destroy(gameObject);
+    }
     private void Update()
     {
         if (HpTower <= 0) 
         {
-            Destroy(gameObject);
+            Die();
         }
 
         if (heroTransform == null)
