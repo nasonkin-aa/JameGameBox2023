@@ -7,13 +7,6 @@ public class Room : MonoBehaviour
 {
     public Bounds bounds;
 
-    public Vector2 position
-    {
-        get => square.transform.position;
-
-        set => square.transform.position = value;
-    }
-    
     private Transform square;
     
     private void Awake()
