@@ -32,7 +32,7 @@ public class RoomTower : IRoomManagerBase
 
     public override void CharacterEnter()
     {
-        throw new System.NotImplementedException();
+        OnStart.Invoke(CountToTarget);
     }
 
     public override void Failed()
