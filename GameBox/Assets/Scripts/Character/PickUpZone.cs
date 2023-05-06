@@ -28,7 +28,7 @@ public class PickUpZone : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         while (time < 1f)
         {
-            time += Time.deltaTime * 5 ;
+            time += Time.deltaTime * 10 ;
             //Char.transform.position = Vector3.Lerp(startPosition, targetPosition, time);
             Char.transform.position = Vector3.Lerp(startPosition, Ball.transform.position, time);
             yield return new WaitForSeconds(0.01f);

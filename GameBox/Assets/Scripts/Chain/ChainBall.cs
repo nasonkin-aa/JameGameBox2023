@@ -19,7 +19,16 @@ public class ChainBall : MonoBehaviour
             Vector2 oppositeForce = -rb.velocity.normalized * slowDownForce;
             rb.AddForce(oppositeForce);
         }
+       // Debug.Log(rb.velocity.magnitude);
     }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<BaseEnemy>() && rb.velocity.magnitude >= 7)
+        {
+            collision.gameObject.GetComponent<BaseEnemy>().GetDamage(1);
+        }
+    }
+
 
 
 }
