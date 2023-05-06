@@ -92,9 +92,10 @@ public class BaseEnemy : MonoBehaviour
         _characterScript.GetDamage(_damage);
     }
 
-    public void OnAggressionEnter()
+    public void OnAggressionEnter(Transform target)
     {
         _state = States.Moving;
+        _target = target;
         _aggressionEvent.OnAggressionEnter.RemoveListener(OnAggressionEnter);
     }
 }

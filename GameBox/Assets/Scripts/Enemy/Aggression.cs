@@ -3,11 +3,11 @@ using UnityEngine.Events;
 
 public class Aggression : MonoBehaviour
 {
-    public UnityEvent OnAggressionEnter;
+    public UnityEvent<Transform> OnAggressionEnter;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<Character>())
-            OnAggressionEnter.Invoke();
+        if (collision.gameObject.GetComponent<Character>() || collision.gameObject.GetComponent<FollowPlayer>())
+            OnAggressionEnter.Invoke(collision.transform);
     }
 }
