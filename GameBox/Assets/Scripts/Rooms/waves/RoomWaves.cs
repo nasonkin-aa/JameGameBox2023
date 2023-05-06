@@ -12,10 +12,10 @@ public class RoomWaves : IRoomManagerBase
     private void Start()
     {
         room = GetComponentInChildren<StarRoom>();
-        room.OnPlayerEnter.AddListener(OnCharacterEnter);
+        room.OnPlayerEnter.AddListener(CharacterEnter);
         spawnManager = GetComponentInChildren<SpawnManager>(); 
         character = FindObjectOfType<Character>();
-        character.OnDie.AddListener(OnCaracterDie);
+        character.OnDie.AddListener(CharacterDie);
         spawnManager.OnFinishLevel.AddListener(Finished);
     }
     public override void Failed()
@@ -27,19 +27,25 @@ public class RoomWaves : IRoomManagerBase
         spawnManager.OnFinishLevel.RemoveListener(Finished);
         OnFinish.Invoke();
     }
-    public override void OnCaracterDie()
+    public override void CharacterDie()
     {
-        character.OnDie.RemoveListener(OnCaracterDie);
+        character.OnDie.RemoveListener(CharacterDie);
         OnCharacterDie.Invoke();
     }
-    public override void OnCharacterEnter()
+    public override void CharacterEnter(int targetCount)
     {
         spawnManager.StartSpawn();    
         OnStart.Invoke(CountToTarget);
     }
-    public override void LevelProgress()
+    public override void LevelProgress(int count)
     {
         _targetNow++;
         OnLevelProgress.Invoke(_targetNow);
+    }
+
+    public override void CharacterEnter()
+    {
+        spawnManager.StartSpawn();
+        OnStart.Invoke(CountToTarget);
     }
 }

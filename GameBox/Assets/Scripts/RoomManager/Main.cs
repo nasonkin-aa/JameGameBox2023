@@ -1,55 +1,64 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Main : IRoomManagerBase
 {
     private IRoomManagerBase _newRoom;
-    private TaskWheel _wheel;
-    // Start is called before the first frame update
+
     void Start()
     {
-        TaskWheel.OnRoomCreate.AddListener(OnCreateRoom);
+        TaskWheel.OnRoomCreate.AddListener(CreateRoom);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    static void StartSpin ()
+    public static void StartSpin ()
     {
         TaskWheel.Spin();
     }
 
-    public void OnCreateRoom(GameObject room)
+    public void CreateRoom(GameObject room)
     {
         _newRoom = room.GetComponent<IRoomManagerBase>();
-        //_newRoom.OnStart.AddListener(OnCharacterEnter);
+        _newRoom?.OnStart.AddListener(CharacterEnter);
+        _newRoom?.OnFinish.AddListener(Finished);
+        _newRoom?.OnCharacterDie.AddListener(CharacterDie);
+        _newRoom?.OnLevelProgress.AddListener(LevelProgress);
+        _newRoom?.OnLose.AddListener(Failed);
     }
 
     public override void Failed()
     {
-        throw new System.NotImplementedException();
+        RemoveAllEvents(_newRoom);
     }
 
     public override void Finished()
     {
-        throw new System.NotImplementedException();
+        RemoveAllEvents(_newRoom);
     }
 
-    public override void OnCaracterDie()
+    public override void CharacterDie()
+    {
+        RemoveAllEvents(_newRoom);
+    }
+
+    public void RemoveAllEvents (IRoomManagerBase room)
+    {
+        room?.OnStart.RemoveAllListeners();
+        room?.OnFinish.RemoveAllListeners();
+        room?.OnCharacterDie.RemoveAllListeners();
+        room?.OnLevelProgress.RemoveAllListeners();
+        room?.OnLose.RemoveAllListeners();
+    }
+
+    public override void CharacterEnter(int targetCount)
     {
         throw new System.NotImplementedException();
     }
 
-    public override void OnCharacterEnter()
+    public override void CharacterEnter()
     {
         throw new System.NotImplementedException();
     }
 
-    public override void LevelProgress()
+    public override void LevelProgress(int count)
     {
         throw new System.NotImplementedException();
     }

@@ -20,10 +20,11 @@ public abstract class IRoomManagerBase : MonoBehaviour
 
     public abstract void Finished();
 
-    public abstract void OnCaracterDie();
+    public abstract void CharacterDie();
 
-    public abstract void OnCharacterEnter();
+    public abstract void CharacterEnter( int targetCount);
+    public abstract void CharacterEnter();
 
-    public abstract void LevelProgress();
+    public abstract void LevelProgress(int count);
 
 }

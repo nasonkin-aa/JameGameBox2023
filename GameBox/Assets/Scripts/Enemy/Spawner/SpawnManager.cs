@@ -9,7 +9,7 @@ public class SpawnManager: MonoBehaviour
     public int numOfAllowedEnemies = 5;
     private int _counter;
     public UnityEvent OnFinishLevel;
-    public UnityEvent OnLevelProgress;
+    public UnityEvent<int> OnLevelProgress;
 
     public GameObject[] enemies;
 
@@ -30,7 +30,7 @@ public class SpawnManager: MonoBehaviour
         _counter--;
         Debug.Log(_counter);
         obj.GetComponent<BaseEnemy>().OnDie.RemoveListener(EnemyCounter);
-        OnLevelProgress.Invoke();
+        OnLevelProgress.Invoke(_counter);
         if (_counter <= 0 ) 
         {
             OnFinishLevel.Invoke();
