@@ -4,8 +4,12 @@ public class RangeEnemy : MovingEnemy
 {
     [SerializeField]
     protected GameObject _projectileSpawnPoint;
+
     [SerializeReference]
     protected GameObject _projectile;
+
+    [SerializeReference]
+    protected bool _IsMovable = true;
 
     protected float _bulletSpeed = 100f; // заглушка, можно перенести в пулю и взять от туда
     protected Transform _projectilePoint;
@@ -34,5 +38,13 @@ public class RangeEnemy : MovingEnemy
 
         bullet.GetComponent<Projectile>().SetDamage = _damage;
         bullet.GetComponent<Projectile>().SetVelocity = direction.normalized * _bulletSpeed;
+    }
+
+    protected override void MoveToTarget()
+    {
+        if (!_IsMovable)
+            return;
+
+        agent.SetDestination(_target.position);
     }
 }
