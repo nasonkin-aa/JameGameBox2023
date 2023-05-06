@@ -1,8 +1,10 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BaseEnemy : MonoBehaviour
 {
+    public UnityEvent<GameObject> OnDie; 
     protected enum States // ������� ������ � ��������� � �������� ������
     {
         Inactive,
@@ -39,7 +41,9 @@ public class BaseEnemy : MonoBehaviour
     {
         _hp -= damage;
         if (_hp <= 0 && _state != States.Dead)
+        {
             StartCoroutine(Die());
+        }
     }
 
     protected virtual void Start()
@@ -60,11 +64,6 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
-    protected virtual void Update()
-    {
-        
-    }
-
     protected virtual void FixedUpdate()
     {
         if (_state == States.Inactive)
@@ -82,6 +81,8 @@ public class BaseEnemy : MonoBehaviour
     }
     protected virtual IEnumerator Die()
     {
+        _state = States.Dead;
+        OnDie.Invoke(gameObject);
         gameObject.GetComponent<Collider2D>().enabled = false;
         StopCoroutine(Attack()); /// ���� ��, � ����� ����������
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TowerBehavior : MonoBehaviour
 {
@@ -9,17 +10,31 @@ public class TowerBehavior : MonoBehaviour
     public GameObject bulletPrefab; // префаб снаряда
     public Transform bulletSpawnPoint; // точка, откуда будут появляться снаряды
     public GameObject Warning;
+    
+    public UnityEvent OnFinishLevel;
+
 
     private Transform heroTransform; // ссылка на героя
     private float nextFireTime; // время, когда турель сможет произвести следующий выстрел
+    public int HpTower = 10;
 
     private void Start()
     {
         heroTransform = GameObject.FindObjectOfType<Character>().transform; // ищем героя в сцене по тегу
     }
 
+    public void Die()
+    {
+        OnFinishLevel.Invoke();
+        Destroy(gameObject);
+    }
     private void Update()
     {
+        if (HpTower <= 0) 
+        {
+            Die();
+        }
+
         if (heroTransform == null)
         {
             return; // герой не найден - выходим из метода
@@ -53,5 +68,16 @@ public class TowerBehavior : MonoBehaviour
         float angle = Mathf.Atan2(distance.y, distance.x) * Mathf.Rad2Deg;
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
         bullet.GetComponent<BulletBehavior>().target = distance;
+    }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+   
+        if (collision.gameObject.GetComponent<ChainBall>())
+        {
+            if(collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude >= 4)
+            {
+                HpTower--;
+            }
+        }
     }
 }

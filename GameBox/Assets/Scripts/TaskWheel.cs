@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TaskWheel: MonoBehaviour
 {
@@ -7,14 +8,16 @@ public class TaskWheel: MonoBehaviour
     
     private const float MinSpinSpeed = 40.0f;
     
-    private float _speed;
+    static float _speed;
 
     private float _spinAngle;
 
-    private bool _taskWasGet;
+    static bool _taskWasGet;
     private bool IsSpinningAvailable => _speed >= MinSpinSpeed;
 
-    public void Spin()
+    public UnityEvent<GameObject> OnRoomCreate;
+
+    public static void Spin()
     {
         _taskWasGet = false;
         _speed = new System.Random().Next(350, 550);
@@ -50,15 +53,10 @@ public class TaskWheel: MonoBehaviour
             {
                 var taskIndex = GetTaskIndex(transform.eulerAngles.z);
                 print(taskIndex);
-                
-                RoomManager.Instance.SpawnRoom(taskIndex);
+
+                OnRoomCreate.Invoke(RoomManager.Instance.SpawnRoom(taskIndex));
                 _taskWasGet = true;
             }
         }
-    }
-
-    private void Start()
-    {
-        Spin();
     }
 }

@@ -2,10 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Character : MonoBehaviour
 {
+
+    public Sprite pickBall;
+    public Sprite stand;
     public static GameObject TargetGameObject;
+
+    public UnityEvent OnDie;
+    public UnityEvent OnTakeCoin;
 
     [SerializeField]
     protected float _hp = 1;
@@ -16,7 +23,7 @@ public class Character : MonoBehaviour
 
     [SerializeField]
     [Range(3f, 20f)]
-    protected float _defaultSpeed = 5f;
+    public float _defaultSpeed = 5f;
 
     private Vector3 _mousePos;
     protected float _speedChar;
@@ -33,7 +40,6 @@ public class Character : MonoBehaviour
 
     public virtual void GetDamage(float damage)
     {
-        //Debug.Log("������� ����");
         _hp -= damage;
         if (_hp <= 0)
             StartCoroutine(Die());
@@ -104,10 +110,9 @@ public class Character : MonoBehaviour
 
     protected virtual IEnumerator Die()
     {
-        //StopCoroutine(); /// ���� ��, � ����� ����������
-        Debug.Log("�������� ����, ���");
+        OnDie.Invoke();
 
-        yield return new WaitForSeconds(1); // ��� �������      
+        yield return new WaitForSeconds(1); 
     }
 
     protected Vector2 TakeDirection(Vector2 point1, Vector2 point2)
@@ -125,11 +130,18 @@ public class Character : MonoBehaviour
 
     public void OnBallPickUped()
     {
+        gameObject.GetComponent<SpriteRenderer>().sprite = pickBall;
         _speedChar = _defaultSpeed * _slowcoefficient;
     }
 
     public void OnBallDropped()
     {
+        gameObject.GetComponent<SpriteRenderer>().sprite = stand;
         _speedChar = _defaultSpeed;
+    }
+
+    public void TakeCoin()
+    {
+        OnTakeCoin.Invoke();
     }
 }

@@ -25,16 +25,15 @@ public class RoomManager: MonoBehaviour
         { 
             Instance = this; 
         }
-        
-        SpawnRoom(1);
     }
 
-    public void SpawnRoom(int index)
+    public GameObject SpawnRoom(int index)
     {
         var room = rooms[index - 1];
         
         var spawnPoint = GetSpawnPoint();
         _currRoom = Instantiate(room, spawnPoint, Quaternion.identity);
+        Debug.Log(12121212);
 
         // TODO: почему нахуй блять
         var newY = hub.transform.position.y + _hubComponent.bounds.extents.y - _currRoomComponent.bounds.extents.y;
@@ -43,6 +42,7 @@ public class RoomManager: MonoBehaviour
         var newXPosition = hub.transform.position.x + _hubComponent.bounds.size.x / 2;
 
         StartCoroutine(MoveRoom(new Vector2(newXPosition, _currRoom.transform.position.y)));
+        return _currRoom;
     }
 
     private Vector2 GetSpawnPoint()
