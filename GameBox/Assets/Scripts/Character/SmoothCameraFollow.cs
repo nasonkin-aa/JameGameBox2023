@@ -4,11 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 public class SmoothCameraFollow : MonoBehaviour
 {
-    public Transform target;
+    private Transform target;
     public float smoothTime = 0.3f;
     public Vector3 offset;
 
     private Vector3 _velocity = Vector3.zero;
+
+    private void Start()
+    {
+        target = FindObjectOfType<Character>().GetComponent<Transform>();
+    }
+
     void FixedUpdate()
     {
         Vector3 targetPosition = target.TransformPoint(offset);

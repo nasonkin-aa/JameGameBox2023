@@ -10,8 +10,9 @@ public class RangeEnemy : MovingEnemy
 
     [SerializeReference]
     protected bool _IsMovable = true;
-
-    protected float _bulletSpeed = 100f; // заглушка, можно перенести в пулю и взять от туда
+    
+    [SerializeReference]
+    protected float _bulletSpeed = 100f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
     protected Transform _projectilePoint;
 
     protected override void Start()
