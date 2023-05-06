@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+
+    public Sprite pickBall;
+    public Sprite stand;
     public static GameObject TargetGameObject;
 
     [SerializeField]
@@ -125,11 +128,13 @@ public class Character : MonoBehaviour
 
     public void OnBallPickUped()
     {
+        gameObject.GetComponent<SpriteRenderer>().sprite = pickBall;
         _speedChar = _defaultSpeed * _slowcoefficient;
     }
 
     public void OnBallDropped()
     {
+        gameObject.GetComponent<SpriteRenderer>().sprite = stand;
         _speedChar = _defaultSpeed;
     }
 }

@@ -135,9 +135,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 2576
-        height: 2563
+        y: 2031
+        width: 2563
+        height: 2575
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,10 +155,10 @@ TextureImporter:
       name: env_set_01_1
       rect:
         serializedVersion: 2
-        x: 2761
-        y: 1391
-        width: 578
-        height: 305
+        x: 488
+        y: 1089
+        width: 245
+        height: 744
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,10 +176,10 @@ TextureImporter:
       name: env_set_01_2
       rect:
         serializedVersion: 2
-        x: 3523
-        y: 1463
-        width: 941
-        height: 944
+        x: 879
+        y: 1075
+        width: 112
+        height: 594
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,10 +197,10 @@ TextureImporter:
       name: env_set_01_3
       rect:
         serializedVersion: 2
-        x: 2938
-        y: 878
-        width: 592
-        height: 115
+        x: 1389
+        y: 1268
+        width: 306
+        height: 576
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,10 +218,10 @@ TextureImporter:
       name: env_set_01_4
       rect:
         serializedVersion: 2
-        x: 3588
-        y: 891
-        width: 607
-        height: 93
+        x: 488
+        y: 591
+        width: 13
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -239,10 +239,10 @@ TextureImporter:
       name: env_set_01_5
       rect:
         serializedVersion: 2
-        x: 2772
-        y: 487
-        width: 744
-        height: 247
+        x: 499
+        y: 412
+        width: 274
+        height: 605
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -260,10 +260,10 @@ TextureImporter:
       name: env_set_01_6
       rect:
         serializedVersion: 2
-        x: 3588
-        y: 498
-        width: 607
-        height: 277
+        x: 890
+        y: 412
+        width: 95
+        height: 605
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,10 +281,10 @@ TextureImporter:
       name: env_set_01_7
       rect:
         serializedVersion: 2
-        x: 3986
-        y: 487
-        width: 29
-        height: 15
+        x: 1459
+        y: 137
+        width: 947
+        height: 945
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -20,5 +20,21 @@ public class Rope : MonoBehaviour
         joint.distance = ropeLength;
         joint.maxDistanceOnly = true;
         joint.autoConfigureDistance = false;
+
+        // Добавляем компонент LineRenderer к начальному объекту
+        lineRenderer = startObject.gameObject.AddComponent<LineRenderer>();
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+        lineRenderer.startWidth = ropeWidth;
+        lineRenderer.endWidth = ropeWidth;
+        lineRenderer.positionCount = 2;
+        lineRenderer.startColor = Color.black;
+        lineRenderer.endColor = Color.black;
+    }
+
+    void Update()
+    {
+        // Обновляем точки отрисовки для LineRenderer
+        lineRenderer.SetPosition(0, startObject.transform.position);
+        lineRenderer.SetPosition(1, endObject.transform.position);
     }
 }

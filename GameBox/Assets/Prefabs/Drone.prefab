@@ -97,6 +97,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d12a2cbe5ba5f9949bf10ff089ede621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  droneSpeed: 5
+  droneSpeed: 8
   targetPosition: {x: 0, y: 0, z: 0}
-  player: {fileID: 0}

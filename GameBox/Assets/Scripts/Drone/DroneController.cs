@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 
 public class DroneController : MonoBehaviour
 {
-    public float droneSpeed = 5f;
+    public float droneSpeed = 2f;
 
     public Vector3 targetPosition = new Vector3(0, 0, 0);
     private bool _carryingPlayer = false;
@@ -44,6 +44,7 @@ public class DroneController : MonoBehaviour
         else if (_carryingPlayer)
         {
             playerTransform.GetComponent<Character>()._defaultSpeed = 0;
+            //playerTransform.parent.position = Vector3.MoveTowards(playerTransform.parent.position, targetPosition, droneSpeed * Time.deltaTime);
             playerTransform.position = Vector3.MoveTowards(playerTransform.position, targetPosition, droneSpeed * Time.deltaTime);
             transform.position = playerTransform.position;
             
