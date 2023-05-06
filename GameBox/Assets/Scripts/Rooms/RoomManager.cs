@@ -36,32 +36,28 @@ public class RoomManager: MonoBehaviour
         Debug.Log(12121212);
 
         // TODO: почему нахуй блять
-        var newY = _hubComponent.position.y;
-        _currRoomComponent.position = new Vector2(_currRoomComponent.position.x, newY);
+        var newY = hub.transform.position.y + _hubComponent.bounds.extents.y - _currRoomComponent.bounds.extents.y;
+        _currRoom.transform.position = new Vector2(_currRoom.transform.position.x, newY);
         
-        var targetRightEdge = _hubComponent.bounds.max.x;
-        var newXPosition = targetRightEdge + _currRoomComponent.bounds.size.x / 2;
-        
-        StartCoroutine(MoveRoom(new Vector2(newXPosition, _currRoomComponent.position.y)));
+        var newXPosition = hub.transform.position.x + _hubComponent.bounds.size.x / 2;
+
+        StartCoroutine(MoveRoom(new Vector2(newXPosition, _currRoom.transform.position.y)));
         return _currRoom;
     }
 
     private Vector2 GetSpawnPoint()
     {
-        var spawnX = _hubComponent.position.x + _hubComponent.bounds.size.x + 10f;
-        var spawnY = _hubComponent.position.y;
+        var spawnX = hub.transform.position.x + _hubComponent.bounds.size.x + 10f;
+        var spawnY = hub.transform.position.y;
         
         return new Vector2(spawnX, spawnY);
     }
     
     private IEnumerator MoveRoom(Vector2 targetPosition, Action action = null)
     {
-        var currPosition = _currRoomComponent.position;
-
-        while (currPosition.x != targetPosition.x)
+        while (_currRoom.transform.position.x - _currRoomComponent.bounds.size.x / 2 > targetPosition.x)
         {
-            currPosition = _currRoomComponent.position;
-            _currRoomComponent.position = Vector2.MoveTowards(currPosition, targetPosition, 2f * Time.deltaTime);
+            _currRoom.transform.position = Vector2.MoveTowards(_currRoom.transform.position, targetPosition, 2f * Time.deltaTime);
             yield return null;
         }
 
