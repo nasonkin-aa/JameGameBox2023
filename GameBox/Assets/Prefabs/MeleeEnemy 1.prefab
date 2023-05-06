@@ -377,6 +377,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd516164dbc92744dbb40218d69eff7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnDie:
+    m_PersistentCalls:
+      m_Calls: []
+  Died: {fileID: -1243743396, guid: 109a43a7cb757214cb8671cbfc76e55b, type: 3}
   _attackCollider: {fileID: 2131929922919572358}
   _attackkDistance: 1.5
   _hp: 1

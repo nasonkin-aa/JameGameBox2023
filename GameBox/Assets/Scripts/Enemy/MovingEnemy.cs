@@ -101,11 +101,11 @@ public class MovingEnemy : BaseEnemy
 
     protected override IEnumerator Die()
     {
+        gameObject.GetComponent<SpriteRenderer>().sprite = Died;  
         StartCoroutine(base.Die());
         agent.speed = 0;
         //StopCoroutine(Attack()); /// нјдо ли, а вдруг пригодитс€
         
-
         yield return new WaitForSeconds(1); // под анмации      
     }
 
