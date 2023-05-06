@@ -2,10 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Character : MonoBehaviour
 {
     public static GameObject TargetGameObject;
+
+    public UnityEvent OnDie;
 
     [SerializeField]
     protected float _hp = 1;
@@ -104,6 +107,7 @@ public class Character : MonoBehaviour
 
     protected virtual IEnumerator Die()
     {
+        OnDie.Invoke();
         //StopCoroutine(); /// ���� ��, � ����� ����������
         Debug.Log("�������� ����, ���");
 

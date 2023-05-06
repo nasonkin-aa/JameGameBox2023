@@ -43,7 +43,7 @@ public class RoomManager: MonoBehaviour
         } 
     }
 
-    public void SpawnRoom(int index)
+    public GameObject SpawnRoom(int index)
     {
         
         var room = rooms[index - 1];
@@ -54,6 +54,7 @@ public class RoomManager: MonoBehaviour
         
         var targetPosition = new Vector2(spawnPoint.x, spawnPoint.y - 2f);
         StartCoroutine(MoveRoom(targetPosition));
+        return _currRoom;
     }
     
     public void DestroyRoom()
