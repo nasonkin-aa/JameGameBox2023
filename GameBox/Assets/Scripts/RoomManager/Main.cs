@@ -3,19 +3,24 @@ using UnityEngine;
 public class Main : IRoomManagerBase
 {
     private IRoomManagerBase _newRoom;
+
     [SerializeField]
     protected TaskWheel _wheel;
+
+    public GameObject _drone;
+
+    protected static bool _isRoomStarted = false;
 
 
     void Start()
     {
-        StartSpin();
         _wheel.OnRoomCreate.AddListener(CreateRoom);
     }
 
     public static void StartSpin ()
     {
         TaskWheel.Spin();
+        _isRoomStarted = true;
     }
 
     public void CreateRoom(GameObject room)
@@ -31,18 +36,22 @@ public class Main : IRoomManagerBase
     public override void Failed()
     {
         Debug.Log("lose");
+        _isRoomStarted = false;
+        //Instantiate()
         RemoveAllEvents(_newRoom);
     }
 
     public override void Finished()
     {
         Debug.Log("finish");
+        _isRoomStarted = false;
         RemoveAllEvents(_newRoom);
     }
 
     public override void CharacterDie()
     {
         Debug.Log("die");
+        _isRoomStarted = false;
         RemoveAllEvents(_newRoom);
     }
 
@@ -72,4 +81,6 @@ public class Main : IRoomManagerBase
         Debug.Log("прогресс " + count);
         throw new System.NotImplementedException();
     }
+
+
 }
