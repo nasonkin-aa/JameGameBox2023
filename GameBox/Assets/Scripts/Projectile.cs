@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -48,14 +46,11 @@ public class Projectile : MonoBehaviour
     {
         if (collision.transform.gameObject.layer == _wallsLayer)
         {
-            Debug.Log("Пуля умерла");
             Destroy(gameObject);
         }
 
         if (_owner == Owner.Enemy && collision.transform.gameObject.layer == _ballLayer)
         {
-            Debug.Log("Пуля попала в шар");
-            Debug.Log(_owner);
             _owner = Owner.Player;
             _rb.velocity = -_velocity;
             _velocity = -_velocity;
@@ -65,14 +60,12 @@ public class Projectile : MonoBehaviour
 
         if (_owner == Owner.Enemy && collision.transform.gameObject.layer == _playerLayer)
         {
-            Debug.Log("Вражеская пуля попала в нас");
             collision.gameObject.GetComponent<Character>()?.GetDamage(_damage);
             Destroy(gameObject);
         }
 
         if (_owner == Owner.Player && collision.transform.gameObject.layer == _enemyLayer)
         {
-            Debug.Log("Наша пуля попала во врага");
             collision.gameObject.GetComponent<BaseEnemy>().GetDamage(_damage);
             Destroy(gameObject);
         }
@@ -82,14 +75,11 @@ public class Projectile : MonoBehaviour
     {
         if (collision.transform.gameObject.layer == _wallsLayer)
         {
-            Debug.Log("Пуля умерла");
             Destroy(gameObject);
         }
 
         if (_owner == Owner.Enemy && collision.transform.gameObject.layer == _ballLayer)
         {
-            Debug.Log("Пуля попала в шар");
-            Debug.Log(_owner);
             _owner = Owner.Player;
             _rb.velocity = -_velocity;
             _velocity = -_velocity;
@@ -99,14 +89,12 @@ public class Projectile : MonoBehaviour
 
         if (_owner == Owner.Enemy && collision.transform.gameObject.layer == _playerLayer)
         {
-            Debug.Log("Вражеская пуля попала в нас");
             collision.gameObject.GetComponent<Character>()?.GetDamage(_damage);
             Destroy(gameObject);
         }
 
         if (_owner == Owner.Player && collision.transform.gameObject.layer == _enemyLayer)
         {
-            Debug.Log("Наша пуля попала во врага");
             collision.gameObject.GetComponent<BaseEnemy>().GetDamage(_damage);
             Destroy(gameObject);
         }
