@@ -38,7 +38,6 @@ public class MovingEnemy : BaseEnemy
 
     protected override void FixedUpdate()
     {
-        Debug.Log(_state);
         if (_state == States.Inactive)
             return;
 
