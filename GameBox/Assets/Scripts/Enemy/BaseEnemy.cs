@@ -1,9 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BaseEnemy : MonoBehaviour
 {
-    protected enum States // Удалить лишнее и расширить в дочернем классе
+    public UnityEvent<GameObject> OnDie; 
+    protected enum States // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     {
         Inactive,
         Attacking,
@@ -11,7 +13,6 @@ public class BaseEnemy : MonoBehaviour
         Turns,
         Dead
     }
-    [SerializeReference]
     protected Transform _target;
 
     [SerializeField]
@@ -40,11 +41,15 @@ public class BaseEnemy : MonoBehaviour
     {
         _hp -= damage;
         if (_hp <= 0 && _state != States.Dead)
+        {
             StartCoroutine(Die());
+        }
     }
 
     protected virtual void Start()
     {
+        _target = Character.TargetGameObject.transform;
+        
         _rb = transform.GetComponent<Rigidbody2D>();
         _targetCollider = _target.GetComponent<Collider2D>();
         _characterScript =
@@ -59,11 +64,6 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
-    protected virtual void Update()
-    {
-        
-    }
-
     protected virtual void FixedUpdate()
     {
         if (_state == States.Inactive)
@@ -72,7 +72,7 @@ public class BaseEnemy : MonoBehaviour
 
     protected virtual IEnumerator Attack()
     {
-        yield return new WaitForSeconds(1); // под анмации
+        yield return new WaitForSeconds(1); // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
         if (_attackCollider.IsTouching(_targetCollider))
         {
@@ -81,10 +81,12 @@ public class BaseEnemy : MonoBehaviour
     }
     protected virtual IEnumerator Die()
     {
+        _state = States.Dead;
+        OnDie.Invoke(gameObject);
         gameObject.GetComponent<Collider2D>().enabled = false;
-        StopCoroutine(Attack()); /// нАдо ли, а вдруг пригодится
+        StopCoroutine(Attack()); /// пїЅпїЅпїЅпїЅ пїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-        yield return new WaitForSeconds(1); // под анмации      
+        yield return new WaitForSeconds(1); // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ      
     }
 
     protected virtual void DealDamage()

@@ -7,10 +7,10 @@ using UnityEngine.Events;
 
 public class PickUpZone : MonoBehaviour
 {
-    private bool isBeingCarried = false; // флаг, указывающий на то, что объект взят
+    private bool isBeingCarried = false; // пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
     private bool throwBlock = false;
     public GameObject Ball; 
-    private Rigidbody2D rbBall; // ссылка на Rigidbody объекта, который будет перемещаться
+    private Rigidbody2D rbBall; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ Rigidbody пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public float pushSpeed = 10f;
     public GameObject Char;
     private Character _characterScript;
@@ -31,7 +31,7 @@ public class PickUpZone : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         while (time < 1f)
         {
-            time += Time.deltaTime * 5 ;
+            time += Time.deltaTime * 10 ;
             Char.transform.position = Vector3.Lerp(startPosition, Ball.transform.position, time);
             yield return new WaitForSeconds(0.01f);
         }
@@ -52,7 +52,7 @@ public class PickUpZone : MonoBehaviour
 
         if (isBeingCarried)
         {
-            if (!throwBlock) // если объект взят
+            if (!throwBlock) // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
                 Ball.transform.position = transform.position;
             if (Input.GetMouseButton(1) && !throwBlock)
             {

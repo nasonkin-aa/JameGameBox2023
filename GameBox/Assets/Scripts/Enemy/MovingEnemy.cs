@@ -14,12 +14,7 @@ public class MovingEnemy : BaseEnemy
     protected Vector2 _previousePos;
     protected int _layerMask;
 
-    public override void GetDamage(float damage)
-    {
-        _hp -= damage;
-        if (_hp <= 0 && _state != States.Dead)
-            StartCoroutine(Die());
-    }
+
     protected override void Start()
     {
         base.Start();
@@ -31,11 +26,7 @@ public class MovingEnemy : BaseEnemy
     }
 
 
-    protected override void Update()
-    {
-
-    }
-
+   
     protected override void FixedUpdate()
     {
         if (_state == States.Inactive)
@@ -110,8 +101,7 @@ public class MovingEnemy : BaseEnemy
 
     protected override IEnumerator Die()
     {
-        gameObject.GetComponent<Collider2D>().enabled = false;
-        _state = States.Dead;
+        StartCoroutine(base.Die());
         agent.speed = 0;
         //StopCoroutine(Attack()); /// нјдо ли, а вдруг пригодитс€
         
