@@ -19,7 +19,7 @@ public class Character : MonoBehaviour
 
     [SerializeField]
     [Range(0f, 1f)]
-    protected float _slow�oefficient = 0.3f;
+    protected float _slowcoefficient = 0.3f;
 
     [SerializeField]
     [Range(3f, 20f)]
