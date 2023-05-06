@@ -29,7 +29,7 @@ public class RoomManager: MonoBehaviour
         SpawnRoom(1);
     }
 
-    public void SpawnRoom(int index)
+    public GameObject SpawnRoom(int index)
     {
         var room = rooms[index - 1];
         
@@ -44,6 +44,7 @@ public class RoomManager: MonoBehaviour
         var newXPosition = targetRightEdge + _currRoomComponent.bounds.size.x / 2;
         
         StartCoroutine(MoveRoom(new Vector2(newXPosition, _currRoomComponent.position.y)));
+        return _currRoom;
     }
 
     private Vector2 GetSpawnPoint()

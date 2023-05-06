@@ -2,17 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Character : MonoBehaviour
 {
     public static GameObject TargetGameObject;
+
+    public UnityEvent OnDie;
+    public UnityEvent OnTakeCoin;
 
     [SerializeField]
     protected float _hp = 1;
 
     [SerializeField]
     [Range(0f, 1f)]
-    protected float _slowcoefficient = 0.3f;
+    protected float _slowÑoefficient = 0.3f;
 
     [SerializeField]
     [Range(3f, 20f)]
@@ -33,7 +37,6 @@ public class Character : MonoBehaviour
 
     public virtual void GetDamage(float damage)
     {
-        //Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
         _hp -= damage;
         if (_hp <= 0)
             StartCoroutine(Die());
@@ -104,10 +107,9 @@ public class Character : MonoBehaviour
 
     protected virtual IEnumerator Die()
     {
-        //StopCoroutine(); /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½, ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½");
+        OnDie.Invoke();
 
-        yield return new WaitForSeconds(1); // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½      
+        yield return new WaitForSeconds(1); 
     }
 
     protected Vector2 TakeDirection(Vector2 point1, Vector2 point2)
@@ -125,11 +127,16 @@ public class Character : MonoBehaviour
 
     public void OnBallPickUped()
     {
-        _speedChar = _defaultSpeed * _slowcoefficient;
+        _speedChar = _defaultSpeed * _slowÑoefficient;
     }
 
     public void OnBallDropped()
     {
         _speedChar = _defaultSpeed;
+    }
+
+    public void TakeCoin()
+    {
+        OnTakeCoin.Invoke();
     }
 }
