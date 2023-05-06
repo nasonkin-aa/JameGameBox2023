@@ -216,6 +216,8 @@ MonoBehaviour:
   _rotationSpeed: 180
   _projectileSpawnPoint: {fileID: 4595666827152764229}
   _projectile: {fileID: 1846829445862965521, guid: 7d82861972b1e554daa6ff2ebd81d806, type: 3}
+  _IsMovable: 1
+  _bulletSpeed: 20
 --- !u!195 &2544975449280091898
 NavMeshAgent:
   m_ObjectHideFlags: 0
