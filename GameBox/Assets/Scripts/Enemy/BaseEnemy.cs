@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BaseEnemy : MonoBehaviour
 {
-    protected enum States // Удалить лишнее и расширить в дочернем классе
+    protected enum States // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     {
         Inactive,
         Attacking,
@@ -11,7 +11,6 @@ public class BaseEnemy : MonoBehaviour
         Turns,
         Dead
     }
-    [SerializeReference]
     protected Transform _target;
 
     [SerializeField]
@@ -42,6 +41,8 @@ public class BaseEnemy : MonoBehaviour
 
     protected virtual void Start()
     {
+        _target = Character.TargetGameObject.transform;
+        
         _rb = transform.GetComponent<Rigidbody2D>();
         _targetCollider = _target.GetComponent<Collider2D>();
         _characterScript =
@@ -62,7 +63,7 @@ public class BaseEnemy : MonoBehaviour
 
     protected virtual IEnumerator Attack()
     {
-        yield return new WaitForSeconds(1); // под анмации
+        yield return new WaitForSeconds(1); // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
         if (_attackCollider.IsTouching(_targetCollider))
         {
@@ -71,11 +72,11 @@ public class BaseEnemy : MonoBehaviour
     }
     protected virtual IEnumerator Die()
     {
-        Debug.Log("ебанись");
+        Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
         gameObject.GetComponent<Collider2D>().enabled = false;
-        StopCoroutine(Attack()); /// нАдо ли, а вдруг пригодится
+        StopCoroutine(Attack()); /// пїЅпїЅпїЅпїЅ пїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-        yield return new WaitForSeconds(1); // под анмации      
+        yield return new WaitForSeconds(1); // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ      
     }
 
     protected virtual void DealDamage()

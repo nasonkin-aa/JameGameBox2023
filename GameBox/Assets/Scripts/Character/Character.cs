@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    public static GameObject TargetGameObject;
 
     [SerializeField]
     protected float _hp = 1;
@@ -23,10 +25,15 @@ public class Character : MonoBehaviour
 
     public virtual void GetDamage(float damage)
     {
-        //Debug.Log("Получен урон");
+        //Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ");
         _hp -= damage;
         if (_hp <= 0)
             StartCoroutine(Die());
+    }
+
+    private void Awake()
+    {
+        TargetGameObject = gameObject;
     }
 
     private void Start()
@@ -86,10 +93,10 @@ public class Character : MonoBehaviour
 
     protected virtual IEnumerator Die()
     {
-        //StopCoroutine(); /// нАдо ли, а вдруг пригодится
-        Debug.Log("Персонаж умер, увы");
+        //StopCoroutine(); /// пїЅпїЅпїЅпїЅ пїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ");
 
-        yield return new WaitForSeconds(1); // под анмации      
+        yield return new WaitForSeconds(1); // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ      
     }
 
     protected Vector2 TakeDirection(Vector2 point1, Vector2 point2)
