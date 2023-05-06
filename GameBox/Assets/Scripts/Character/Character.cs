@@ -15,7 +15,7 @@ public class Character : MonoBehaviour
 
     [SerializeField]
     [Range(0f, 1f)]
-    protected float _slow—oefficient = 0.3f;
+    protected float _slowcoefficient = 0.3f;
 
     [SerializeField]
     [Range(3f, 20f)]
@@ -129,7 +129,7 @@ public class Character : MonoBehaviour
 
     public void OnBallPickUped()
     {
-        _speedChar = _defaultSpeed * _slow—oefficient;
+        _speedChar = _defaultSpeed * _slowcoefficient;
     }
 
     public void OnBallDropped()
