@@ -12,6 +12,7 @@ public class TowerBehavior : MonoBehaviour
 
     private Transform heroTransform; // ссылка на героя
     private float nextFireTime; // время, когда турель сможет произвести следующий выстрел
+    public int HpTower = 10;
 
     private void Start()
     {
@@ -20,6 +21,11 @@ public class TowerBehavior : MonoBehaviour
 
     private void Update()
     {
+        if (HpTower <= 0) 
+        {
+            Destroy(gameObject);
+        }
+
         if (heroTransform == null)
         {
             return; // герой не найден - выходим из метода
@@ -53,5 +59,16 @@ public class TowerBehavior : MonoBehaviour
         float angle = Mathf.Atan2(distance.y, distance.x) * Mathf.Rad2Deg;
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
         bullet.GetComponent<BulletBehavior>().target = distance;
+    }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+   
+        if (collision.gameObject.GetComponent<ChainBall>())
+        {
+            if(collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude >= 4)
+            {
+                HpTower--;
+            }
+        }
     }
 }
