@@ -101,9 +101,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 10
-  fireRate: 1
+  fireRate: 0.2
   bulletPrefab: {fileID: 3051040358989244190, guid: 46d641f282b3a0c4a96ef856ce95b050, type: 3}
   bulletSpawnPoint: {fileID: 8153485784142093444}
+  Warning: {fileID: 4893631213651155034, guid: 1e2924d3aa64c22408fc34e4792057ed, type: 3}
+  OnFinishLevel:
+    m_PersistentCalls:
+      m_Calls: []
+  HpTower: 10
 --- !u!61 &378981428396446720
 BoxCollider2D:
   m_ObjectHideFlags: 0
