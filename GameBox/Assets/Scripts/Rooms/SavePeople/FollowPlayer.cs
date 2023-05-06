@@ -4,18 +4,28 @@ using static UnityEngine.GraphicsBuffer;
 
 public class FollowPlayer : MonoBehaviour
 {
-    public GameObject player;
+    public GameObject target = null;
     public float followSpeed = 5f;
     public float stoppingDistance = 1f;
     public NavMeshAgent agent;
     private bool isFollowing = false;
-
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
-       if( other.GetComponent<Character>())
-            player = other.gameObject;
+        if (other.GetComponent<SaveZoneFollowers>())
+        {
+            gameObject.GetComponent<CircleCollider2D>().enabled = false;
+            target = other.gameObject;
             isFollowing = true;
+        }
+        if(other.GetComponent<Character>())
+        {
+            target = other.gameObject;
+            isFollowing = true;
+        }
     }
+    
+    
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -26,25 +36,17 @@ public class FollowPlayer : MonoBehaviour
 
     private void Update()
     {
-        if (isFollowing && player != null)
+        if (isFollowing && target != null)
         {
-            agent.SetDestination(player.transform.position);
-
-            /*float angle = Mathf.Atan2(player.transform.position.y, player.transform.position.x) * Mathf.Rad2Deg;
-            Vector2 direction = player.transform.position - transform.position;
-
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));*/
-            float angle = Mathf.Atan2(player.transform.position.y - transform.position.y, player.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
+            agent.SetDestination(target.transform.position);
+           
+            float angle = Mathf.Atan2(target.transform.position.y - transform.position.y, target.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-            /*Quaternion targetRotation = TakeRotationTo(transform.position, player.transform.position);
-
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 3 * Time.deltaTime);
-*/
-            float distance = Vector2.Distance(transform.position, player.transform.position);
+  
+            float distance = Vector2.Distance(transform.position, target.transform.position);
             if (distance > stoppingDistance)
             {
-                agent.speed = 3;
-               // transform.position += (Vector3)direction.normalized * followSpeed * Time.deltaTime;
+                agent.speed = 3;          
             }
             else
             {
