@@ -8,12 +8,20 @@ public class Character : MonoBehaviour
     [SerializeField]
     protected float _hp = 1;
 
-    private Vector3 mousePos;
+    [SerializeField]
+    [Range(0f, 1f)]
+    protected float _slow—oefficient = 0.3f;
 
-    public float speedChar = 5f;
+    [SerializeField]
+    [Range(3f, 20f)]
+    protected float _defaultSpeed = 5f;
 
-    public  Rigidbody2D rbChar;
+    private Vector3 _mousePos;
+    protected float _speedChar;
+
+    protected  Rigidbody2D _rbChar;
     protected bool _isMovingBlock = false;
+    protected PickUpZone _pickUpZote;
 
     public bool IsMovingBlock 
     {
@@ -31,8 +39,11 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
-        rbChar = GetComponent<Rigidbody2D>();
-   
+        _rbChar = GetComponent<Rigidbody2D>();
+        _pickUpZote = GetComponentInChildren<PickUpZone>();
+        _pickUpZote.OnBallPickUp.AddListener(OnBallPickUped);
+        _pickUpZote.OnBallDrop.AddListener(OnBallDropped);
+        _speedChar = _defaultSpeed;
     }
     private void Update()
     {
@@ -45,7 +56,7 @@ public class Character : MonoBehaviour
         if (!_isMovingBlock)
             PlayerControler();
         else
-            rbChar.velocity = Vector2.zero;
+            _rbChar.velocity = Vector2.zero;
     }
     private void PlayerControler()
     {
@@ -71,16 +82,16 @@ public class Character : MonoBehaviour
 
         movement.Normalize();
 
-        rbChar.velocity = movement * speedChar;
+        _rbChar.velocity = movement * _speedChar;
     }
 
 
     private void LookAt()
     {
-        mousePos = Input.mousePosition;
-        mousePos.z = 10; 
-        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-        float angle = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x) * Mathf.Rad2Deg;
+        _mousePos = Input.mousePosition;
+        _mousePos.z = 10; 
+        _mousePos = Camera.main.ScreenToWorldPoint(_mousePos);
+        float angle = Mathf.Atan2(_mousePos.y - transform.position.y, _mousePos.x - transform.position.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
@@ -103,5 +114,15 @@ public class Character : MonoBehaviour
 
         float angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
         return Quaternion.Euler(new Vector3(0, 0, angle));
+    }
+
+    public void OnBallPickUped()
+    {
+        _speedChar = _defaultSpeed * _slow—oefficient;
+    }
+
+    public void OnBallDropped()
+    {
+        _speedChar = _defaultSpeed;
     }
 }

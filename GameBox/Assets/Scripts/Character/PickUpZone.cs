@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PickUpZone : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class PickUpZone : MonoBehaviour
     public GameObject Char;
     private Character _characterScript;
     protected Coroutine threw;
+    public UnityEvent OnBallPickUp;
+    public UnityEvent OnBallDrop;
 
     void Start ()
     {
@@ -37,16 +40,25 @@ public class PickUpZone : MonoBehaviour
     private void FixedUpdate()
     {
         if (Input.GetMouseButton(0) && transform.GetComponent<Collider2D>().IsTouchingLayers())
+        {
+            OnBallPickUp.Invoke();
             isBeingCarried = true;
+        }
         else
+        {
+            OnBallDrop.Invoke();
             isBeingCarried = false;
+        }
 
         if (isBeingCarried)
         {
             if (!throwBlock) // если объект взят
                 Ball.transform.position = transform.position;
             if (Input.GetMouseButton(1) && !throwBlock)
+            {
+                OnBallDrop.Invoke();
                 ThrowBall();
+            }
         }
     }
 
