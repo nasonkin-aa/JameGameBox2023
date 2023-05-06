@@ -21,10 +21,6 @@ public class RangeEnemy : MovingEnemy
         _projectilePoint = _projectileSpawnPoint.transform;
     }
 
-    protected override void  Update()
-    {
-        base.Update();
-    }
 
     protected override void DealDamage()
     {

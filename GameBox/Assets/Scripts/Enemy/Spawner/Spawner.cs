@@ -8,9 +8,9 @@ public class Spawner: MonoBehaviour
     
     public bool IsSpawnAllowed => Time.time >= _nextSpawnTime;
         
-    public void Spawn(GameObject enemy)
+    public GameObject Spawn(GameObject enemy)
     {
-        Instantiate(enemy, transform.position, Quaternion.identity);
         _nextSpawnTime = Time.time + DelayTime;
+        return Instantiate(enemy, transform.position, Quaternion.identity);
     }
 }
