@@ -15,6 +15,8 @@ public class BaseEnemy : MonoBehaviour
     }
     protected Transform _target;
 
+    public Sprite Died;
+
     [SerializeField]
     protected PolygonCollider2D _attackCollider;
 
@@ -86,6 +88,7 @@ public class BaseEnemy : MonoBehaviour
         gameObject.GetComponent<Collider2D>().enabled = false;
         StopCoroutine(Attack()); /// ���� ��, � ����� ����������
 
+        gameObject.GetComponent<SpriteRenderer>().sprite = Died;
         yield return new WaitForSeconds(1); // ��� �������      
     }
 
