@@ -83,12 +83,13 @@ public class BaseEnemy : MonoBehaviour
     }
     protected virtual IEnumerator Die()
     {
+        gameObject.GetComponent<SpriteRenderer>().sprite = Died;
         _state = States.Dead;
         OnDie.Invoke(gameObject);
         gameObject.GetComponent<Collider2D>().enabled = false;
         StopCoroutine(Attack()); /// ���� ��, � ����� ����������
 
-        gameObject.GetComponent<SpriteRenderer>().sprite = Died;
+        
         yield return new WaitForSeconds(1); // ��� �������      
     }
 
