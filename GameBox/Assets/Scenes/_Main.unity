@@ -179,6 +179,54 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3219960858736189093, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.515
+      objectReference: {fileID: 0}
+    - target: {fileID: 3219960858736189093, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.431
+      objectReference: {fileID: 0}
+    - target: {fileID: 3232220195758993752, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.661
+      objectReference: {fileID: 0}
+    - target: {fileID: 3232220195758993752, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.094
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032143079608355947, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.304
+      objectReference: {fileID: 0}
+    - target: {fileID: 4032143079608355947, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.732
+      objectReference: {fileID: 0}
+    - target: {fileID: 4733116358931932148, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
+      propertyPath: m_Anchor.x
+      value: -0.39440235
+      objectReference: {fileID: 0}
+    - target: {fileID: 4733116358931932148, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
+      propertyPath: m_Anchor.y
+      value: -0.3592788
+      objectReference: {fileID: 0}
+    - target: {fileID: 7847640054004916577, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7847640054004916577, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.145
+      objectReference: {fileID: 0}
+    - target: {fileID: 7895583225297053368, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
+      propertyPath: m_Radius
+      value: 1.3601253
+      objectReference: {fileID: 0}
+    - target: {fileID: 7895583225297053368, guid: 3212d5cdeb804f747bb04c38e53efad2, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0054418794
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
