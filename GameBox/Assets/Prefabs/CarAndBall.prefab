@@ -224,7 +224,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6452190590598100605}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -4.8741417, y: 3.448907, z: 10}
+  m_LocalPosition: {x: -0.504142, y: 1.5989068, z: 9.95293}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -297,8 +297,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 1
-  speedChar: 5
-  rbChar: {fileID: 7449349556467665165}
+  "_slow\u0421oefficient": 0.3
+  _defaultSpeed: 5
 --- !u!50 &7449349556467665165
 Rigidbody2D:
   serializedVersion: 4
@@ -471,6 +471,12 @@ MonoBehaviour:
   Ball: {fileID: 2458743124084841692}
   pushSpeed: 10
   Char: {fileID: 6452190590598100605}
+  OnBallPickUp:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBallDrop:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!50 &3207568509472036687
 Rigidbody2D:
   serializedVersion: 4

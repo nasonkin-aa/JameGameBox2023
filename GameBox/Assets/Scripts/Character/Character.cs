@@ -16,7 +16,7 @@ public class Character : MonoBehaviour
 
     [SerializeField]
     [Range(3f, 20f)]
-    protected float _defaultSpeed = 5f;
+    public float _defaultSpeed = 5f;
 
     private Vector3 _mousePos;
     protected float _speedChar;
