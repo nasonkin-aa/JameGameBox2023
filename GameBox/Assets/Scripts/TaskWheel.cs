@@ -15,7 +15,7 @@ public class TaskWheel: MonoBehaviour
     static bool _taskWasGet;
     private bool IsSpinningAvailable => _speed >= MinSpinSpeed;
 
-    public static UnityEvent<GameObject> OnRoomCreate;
+    public UnityEvent<GameObject> OnRoomCreate;
 
     public static void Spin()
     {
@@ -58,10 +58,5 @@ public class TaskWheel: MonoBehaviour
                 _taskWasGet = true;
             }
         }
-    }
-
-    private void Start()
-    {
-        Spin();
     }
 }
