@@ -266,18 +266,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tower
       objectReference: {fileID: 0}
-    - target: {fileID: 1759471244922672052, guid: c0bffae782779844d941dc4e9bb850bf, type: 3}
-      propertyPath: HpTower
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1759471244922672052, guid: c0bffae782779844d941dc4e9bb850bf, type: 3}
-      propertyPath: Warning
-      value: 
-      objectReference: {fileID: 4893631213651155034, guid: 1e2924d3aa64c22408fc34e4792057ed, type: 3}
-    - target: {fileID: 1759471244922672052, guid: c0bffae782779844d941dc4e9bb850bf, type: 3}
-      propertyPath: fireRate
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 1950858314676691565, guid: c0bffae782779844d941dc4e9bb850bf, type: 3}
       propertyPath: m_RootOrder
       value: -1
