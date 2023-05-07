@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
+using UnityEngine.SceneManagement;
 public class Character : MonoBehaviour
 {
-
+    public Sprite newSprite;
     public Sprite pickBall;
     public Sprite stand;
     public static GameObject TargetGameObject;
@@ -31,7 +31,7 @@ public class Character : MonoBehaviour
     protected  Rigidbody2D _rbChar;
     protected bool _isMovingBlock = false;
     protected PickUpZone _pickUpZote;
-
+    private SpriteRenderer spriteRenderer;
     public bool IsMovingBlock 
     {
         get { return _isMovingBlock; }
@@ -52,6 +52,7 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         _rbChar = GetComponent<Rigidbody2D>();
         _pickUpZote = GetComponentInChildren<PickUpZone>();
         _pickUpZote.OnBallPickUp.AddListener(OnBallPickUped);
@@ -110,9 +111,11 @@ public class Character : MonoBehaviour
 
     protected virtual IEnumerator Die()
     {
-        OnDie.Invoke();
-
-        yield return new WaitForSeconds(1); 
+        OnDie.Invoke(); 
+        spriteRenderer.sprite = newSprite;
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
+        yield return new WaitForSeconds(1);
     }
 
     protected Vector2 TakeDirection(Vector2 point1, Vector2 point2)

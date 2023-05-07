@@ -8,7 +8,7 @@ public class RandomTraps : MonoBehaviour
     public GameObject objectTrap;
     public float spawnInterval = 5f;
 
-    private int CountTraps = 10;
+    private int CountTraps = 20;
     private List<Vector2> WarningsPos = new List<Vector2>();
     private Collider2D spawnArea;
     private bool isSpawning = false;

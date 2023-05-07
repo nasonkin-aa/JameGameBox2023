@@ -19,6 +19,7 @@ public class SpawnManager: MonoBehaviour
     public void Start()
     {
         _counter = numOfAllowedEnemies;
+        StartSpawn();
     }
     public void StartSpawn()
     {
@@ -58,7 +59,7 @@ public class SpawnManager: MonoBehaviour
 
             _numOfSpawnedEnemies += 1;
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(4);
         }
     }
 }

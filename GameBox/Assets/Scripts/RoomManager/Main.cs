@@ -12,10 +12,10 @@ public class Main : IRoomManagerBase
     protected static bool _isRoomStarted = false;
 
 
-    void Start()
+ /*   void Start()
     {
         _wheel.OnRoomCreate.AddListener(CreateRoom);
-    }
+    }*/
 
     public static void StartSpin ()
     {

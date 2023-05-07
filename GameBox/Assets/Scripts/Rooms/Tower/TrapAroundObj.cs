@@ -58,9 +58,9 @@ public class TrapAroundObj : MonoBehaviour
     }
     private IEnumerator ObjectAnimation(List<GameObject> list)
     {
-
         Worning.SetActive(true);
         yield return new WaitForSeconds(2);
+        Debug.Log("111111111111");
         Worning.SetActive(false);
         float time = 0f;
         while (time < 2.2f)

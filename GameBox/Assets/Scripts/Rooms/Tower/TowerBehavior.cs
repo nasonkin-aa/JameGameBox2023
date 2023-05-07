@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class TowerBehavior : MonoBehaviour
     public GameObject bulletPrefab; // префаб снар€да
     public Transform bulletSpawnPoint; // точка, откуда будут по€вл€тьс€ снар€ды
     public GameObject Warning;
-    
+    public GameObject pobeda;
     public UnityEvent OnFinishLevel;
 
 
@@ -25,6 +26,7 @@ public class TowerBehavior : MonoBehaviour
 
     public void Die()
     {
+        pobeda.SetActive(true);
         OnFinishLevel.Invoke();
         Destroy(gameObject);
     }
