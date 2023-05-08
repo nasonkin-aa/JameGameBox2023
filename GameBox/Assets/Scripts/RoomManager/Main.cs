@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Main : IRoomManagerBase
@@ -12,16 +13,16 @@ public class Main : IRoomManagerBase
     protected Button _button;
 
     protected bool _isRoomStarted = false;
+    protected GameObject _currentRoom;
 
 
     void Start()
     {
         _button.OnButtonClick.AddListener(StartSpin);
         _wheel.OnRoomCreate.AddListener(CreateRoom);
-        Debug.Log(_wheel);
     }
 
-    public void StartSpin ()
+    public void StartSpin()
     {
         Debug.Log("spawn");
         if (!_isRoomStarted)
@@ -39,34 +40,40 @@ public class Main : IRoomManagerBase
         _newRoom.OnCharacterDie.AddListener(CharacterDie);
         _newRoom.OnLevelProgress.AddListener(LevelProgress);
         _newRoom.OnLose.AddListener(Failed);
+        _currentRoom = room;
     }
 
     public override void Failed()
     {
         Debug.Log("lose");
         _isRoomStarted = false;
-        Debug.Log(Instantiate(_drone, transform.position, transform.rotation));
+        Instantiate(_drone, transform.position, transform.rotation);
+
         RemoveAllEvents(_newRoom);
+        StartCoroutine(MoveRoomAway(_currentRoom.transform.position.x + 30));
     }
 
     public override void Finished()
     {
         Debug.Log("finish");
         _isRoomStarted = false;
-        Debug.Log(Instantiate(_drone, transform.position, transform.rotation));
+        Instantiate(_drone, transform.position, transform.rotation);
+
         RemoveAllEvents(_newRoom);
+        StartCoroutine(MoveRoomAway(_currentRoom.transform.position.x + 30));
     }
 
     public override void CharacterDie()
     {
         Debug.Log("die");
         _isRoomStarted = false;
-        Debug.Log(Instantiate(_drone, transform.position, transform.rotation));
+        Instantiate(_drone, transform.position, transform.rotation);
 
         RemoveAllEvents(_newRoom);
+        StartCoroutine(MoveRoomAway(_currentRoom.transform.position.x + 30));
     }
 
-    public void RemoveAllEvents (IRoomManagerBase room)
+    public void RemoveAllEvents(IRoomManagerBase room)
     {
         room.OnStart.RemoveAllListeners();
         room.OnFinish.RemoveAllListeners();
@@ -78,20 +85,26 @@ public class Main : IRoomManagerBase
     public override void CharacterEnter(int targetCount)
     {
         Debug.Log("зашёл " + targetCount);
-        //Debug.Log(Instantiate(_drone, transform.position, transform.rotation));
     }
 
     public override void CharacterEnter()
     {
         Debug.Log("зашёл просто");
-        //Debug.Log(Instantiate(_drone, transform.position, transform.rotation));
     }
 
     public override void LevelProgress(int count)
     {
         Debug.Log("прогресс " + count);
-        //Debug.Log(Instantiate(_drone, transform.position, transform.rotation));
+
     }
 
-
+    private IEnumerator MoveRoomAway(float targetPositionX)
+    {
+        while (_currentRoom.transform.position.x < targetPositionX)
+        {
+            _currentRoom.transform.position = Vector2.MoveTowards(_currentRoom.transform.position, new Vector2(targetPositionX, _currentRoom.transform.position.y), 2f * Time.deltaTime);
+            yield return null;
+        }
+        Destroy(_currentRoom);
+    }
 }

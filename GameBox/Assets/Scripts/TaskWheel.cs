@@ -35,10 +35,10 @@ public class TaskWheel: MonoBehaviour
     private int GetTaskIndex(float angle)
     {
         // кол-во заданий
-        var numberOfSections = 7;
+        var numberOfSections = RoomManager.Instance.rooms.Length;
         float angleOffset = 360 / numberOfSections;
 
-        return Mathf.CeilToInt(((angle + angleOffset / 2) / angleOffset));
+        return (int)(angle / angleOffset);
     }
     
     private void FixedUpdate()

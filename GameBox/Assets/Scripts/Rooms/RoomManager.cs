@@ -10,8 +10,6 @@ public class RoomManager: MonoBehaviour
     
     private GameObject _currRoom;
 
-    private Room _hubComponent => hub.GetComponent<Room>();
-
     private Transform _currRoomConPoint => _currRoom.GetComponentInChildren<ConnectPoint>().transform;
     private Vector2 _hubConPoint => hub.GetComponentInChildren<ConnectPoint>().transform.position;
 
@@ -31,7 +29,7 @@ public class RoomManager: MonoBehaviour
 
     public GameObject SpawnRoom(int index)
     {
-        var room = rooms[index - 1];
+        var room = rooms[index];
         
         var spawnPoint = GetSpawnPoint();
         _currRoom = Instantiate(room, spawnPoint, Quaternion.identity);
