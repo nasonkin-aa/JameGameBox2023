@@ -11,6 +11,8 @@ public class Main : IRoomManagerBase
     protected GameObject _drone;
     [SerializeField]
     protected Button _button;
+    [SerializeField]
+    protected Tablo _tablo;
 
     protected bool _isRoomStarted = false;
     protected GameObject _currentRoom;
@@ -20,6 +22,8 @@ public class Main : IRoomManagerBase
     {
         _button.OnButtonClick.AddListener(StartSpin);
         _wheel.OnRoomCreate.AddListener(CreateRoom);
+        _tablo.OnWin.AddListener(GameOver);
+        _tablo.OnLose.AddListener(GameOver);
     }
 
     public void StartSpin()
@@ -50,7 +54,8 @@ public class Main : IRoomManagerBase
         Instantiate(_drone, transform.position, transform.rotation);
 
         RemoveAllEvents(_newRoom);
-        StartCoroutine(MoveRoomAway(_currentRoom.transform.position.x + 30));
+        StartCoroutine(MoveRoomAway(_currentRoom.transform.position.x + 20));
+        _tablo.ActivateLose();
     }
 
     public override void Finished()
@@ -60,7 +65,8 @@ public class Main : IRoomManagerBase
         Instantiate(_drone, transform.position, transform.rotation);
 
         RemoveAllEvents(_newRoom);
-        StartCoroutine(MoveRoomAway(_currentRoom.transform.position.x + 30));
+        StartCoroutine(MoveRoomAway(_currentRoom.transform.position.x + 20));
+        _tablo.ActivateWin();
     }
 
     public override void CharacterDie()
@@ -70,7 +76,8 @@ public class Main : IRoomManagerBase
         Instantiate(_drone, transform.position, transform.rotation);
 
         RemoveAllEvents(_newRoom);
-        StartCoroutine(MoveRoomAway(_currentRoom.transform.position.x + 30));
+        StartCoroutine(MoveRoomAway(_currentRoom.transform.position.x + 20));
+        _tablo.ActivateLose();
     }
 
     public void RemoveAllEvents(IRoomManagerBase room)
@@ -106,5 +113,10 @@ public class Main : IRoomManagerBase
             yield return null;
         }
         Destroy(_currentRoom);
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("Игра окончена");
     }
 }
