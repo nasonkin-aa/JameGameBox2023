@@ -33,26 +33,15 @@ public class TrapAroundObj : MonoBehaviour
             float angle = Random.Range(0f, Mathf.PI * 2f);
 
 
-        // Создаем луч, направленный в заданном направлении
-
             Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-            //RaycastHit2D hit = Physics2D.Raycast(transform.position, direction);
-
-            // Если луч сталкивается с коллайдером границ объекта, спавним объект
-/*            if (hit.collider == coll)
-            {*/
-                // Вычисляем позицию для спавна объекта
                 Vector2 spawnPosition = (Vector2)transform.position + direction * spawnDistance;
 
                 // Создаем новый объект
                 float angle2 = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
                 Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle2 - 90));
-                GameObject newObject = Instantiate(spawnObject, spawnPosition, targetRotation);
+                GameObject newObject = Instantiate(spawnObject, spawnPosition, targetRotation, transform);
                 Destroy( newObject,4f );
                 spearList.Add( newObject );
-                // Делаем новый объект дочерним для текущего объекта
-                newObject.transform.parent = transform;
-            //}
         }
                 StartCoroutine(ObjectAnimation(spearList));
     }
@@ -85,14 +74,12 @@ public class TrapAroundObj : MonoBehaviour
                 time += Time.deltaTime;
                 Vector2 vector2 = new Vector2(Mathf.Cos(spear.transform.rotation.z * Mathf.Deg2Rad),
                     Mathf.Sin(spear.transform.rotation.z * Mathf.Deg2Rad)).normalized;
-                //Vector2 direction = vector2 * 0.5f;
                 spear.transform.position = Vector2.MoveTowards(spear.transform.position, (Vector2)transform.position , time);
             }
             yield return null;
         }
-        //transform.position = startPosition;
+
         list.Clear();
-        //transform.position = startPosition;
         yield return new WaitForSeconds(3);
         SpawnObjects();
     }

@@ -12,7 +12,10 @@ public class RoomManager: MonoBehaviour
 
     private Room _hubComponent => hub.GetComponent<Room>();
     private Room _currRoomComponent => _currRoom.GetComponent<Room>();
-    
+
+    private Transform _currRoomConPoint => _currRoom.GetComponentInChildren<ConnectPoint>().transform;
+    private Transform _hubConPoint => hub.GetComponentInChildren<ConnectPoint>().transform;
+
     public static RoomManager Instance { get; private set; }
 
     private void Awake()
@@ -34,27 +37,25 @@ public class RoomManager: MonoBehaviour
         var spawnPoint = GetSpawnPoint();
         _currRoom = Instantiate(room, spawnPoint, Quaternion.identity);
 
-        // TODO: почему нахуй блять
-        var newY = hub.transform.position.y + _hubComponent.bounds.extents.y - _currRoomComponent.bounds.extents.y;
-        _currRoom.transform.position = new Vector2(_currRoom.transform.position.x, newY);
-        
-        var newXPosition = hub.transform.position.x + _hubComponent.bounds.size.x / 2;
+        var spawnX = _hubConPoint.transform.position.x + _hubComponent.transform.localScale.x;
+        var spawnY = _hubConPoint.transform.position.y - _currRoomConPoint.localPosition.y;
+        _currRoom.transform.position = new Vector3(spawnX, spawnY);
 
-        StartCoroutine(MoveRoom(new Vector2(newXPosition, _currRoom.transform.position.y)));
+        StartCoroutine(MoveRoom(new Vector2(_hubConPoint.transform.position.x, _currRoom.transform.position.y)));
         return _currRoom;
     }
 
     private Vector2 GetSpawnPoint()
     {
-        var spawnX = hub.transform.position.x + _hubComponent.bounds.size.x + 10f;
-        var spawnY = hub.transform.position.y;
+        var spawnX = _hubConPoint.transform.position.x + _hubComponent.transform.localScale.x;
+        var spawnY = _hubConPoint.transform.position.y;
         
         return new Vector2(spawnX, spawnY);
     }
     
     private IEnumerator MoveRoom(Vector2 targetPosition, Action action = null)
     {
-        while (_currRoom.transform.position.x - _currRoomComponent.bounds.size.x / 2 > targetPosition.x)
+        while (_currRoomConPoint.position.x > targetPosition.x)
         {
             _currRoom.transform.position = Vector2.MoveTowards(_currRoom.transform.position, targetPosition, 2f * Time.deltaTime);
             yield return null;

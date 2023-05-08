@@ -39,7 +39,7 @@ public class RandomTraps : MonoBehaviour
             {
                 Vector2 spawnPosition = GetRandomSpawnPosition();
                 
-                GameObject newObj = Instantiate(objectWarning, spawnPosition, Quaternion.identity);
+                GameObject newObj = Instantiate(objectWarning, spawnPosition, Quaternion.identity, transform);
                 WarningsPos.Add(spawnPosition);
                 Destroy(newObj, 2f);
             }
@@ -55,7 +55,7 @@ public class RandomTraps : MonoBehaviour
     {
         foreach (Vector2 obj in objects)
         {
-            GameObject trap = Instantiate(objectTrap, obj, Quaternion.identity);
+            GameObject trap = Instantiate(objectTrap, obj, Quaternion.identity, transform);
             Destroy(trap, 2f);
         }
         WarningsPos.Clear();
