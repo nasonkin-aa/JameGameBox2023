@@ -11,10 +11,9 @@ public class RoomManager: MonoBehaviour
     private GameObject _currRoom;
 
     private Room _hubComponent => hub.GetComponent<Room>();
-    private Room _currRoomComponent => _currRoom.GetComponent<Room>();
 
     private Transform _currRoomConPoint => _currRoom.GetComponentInChildren<ConnectPoint>().transform;
-    private Transform _hubConPoint => hub.GetComponentInChildren<ConnectPoint>().transform;
+    private Vector2 _hubConPoint => hub.GetComponentInChildren<ConnectPoint>().transform.position;
 
     public static RoomManager Instance { get; private set; }
 
@@ -37,18 +36,18 @@ public class RoomManager: MonoBehaviour
         var spawnPoint = GetSpawnPoint();
         _currRoom = Instantiate(room, spawnPoint, Quaternion.identity);
 
-        var spawnX = _hubConPoint.transform.position.x + _hubComponent.transform.localScale.x;
-        var spawnY = _hubConPoint.transform.position.y - _currRoomConPoint.localPosition.y;
+        var spawnX = _currRoom.transform.position.x;
+        var spawnY = _hubConPoint.y - _currRoomConPoint.localPosition.y;
         _currRoom.transform.position = new Vector3(spawnX, spawnY);
 
-        StartCoroutine(MoveRoom(new Vector2(_hubConPoint.transform.position.x, _currRoom.transform.position.y)));
+        StartCoroutine(MoveRoom(new Vector2(_hubConPoint.x, _currRoom.transform.position.y)));
         return _currRoom;
     }
 
     private Vector2 GetSpawnPoint()
     {
-        var spawnX = _hubConPoint.transform.position.x + _hubComponent.transform.localScale.x;
-        var spawnY = _hubConPoint.transform.position.y;
+        var spawnX = _hubConPoint.x + 30;
+        var spawnY = _hubConPoint.y;
         
         return new Vector2(spawnX, spawnY);
     }

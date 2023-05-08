@@ -8,34 +8,37 @@ public class Main : IRoomManagerBase
     protected TaskWheel _wheel;
     [SerializeField]
     protected GameObject _drone;
+    [SerializeField]
+    protected Button _button;
 
     protected bool _isRoomStarted = false;
 
 
     void Start()
     {
+        _button.OnButtonClick.AddListener(StartSpin);
         _wheel.OnRoomCreate.AddListener(CreateRoom);
         Debug.Log(_wheel);
     }
 
-    public static void StartSpin ()
+    public void StartSpin ()
     {
         Debug.Log("spawn");
-        TaskWheel.Spin();
+        if (!_isRoomStarted)
+        {
+            _isRoomStarted = true;
+            TaskWheel.Spin();
+        }
     }
 
     public void CreateRoom(GameObject room)
     {
-        Debug.Log(room);
-        _isRoomStarted = true;
         _newRoom = room.GetComponentInChildren<IRoomManagerBase>();
-        Debug.Log(_newRoom);
         _newRoom.OnStart.AddListener(CharacterEnter);
         _newRoom.OnFinish.AddListener(Finished);
         _newRoom.OnCharacterDie.AddListener(CharacterDie);
         _newRoom.OnLevelProgress.AddListener(LevelProgress);
         _newRoom.OnLose.AddListener(Failed);
-
     }
 
     public override void Failed()

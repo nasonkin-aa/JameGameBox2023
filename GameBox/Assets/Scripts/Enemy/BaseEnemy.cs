@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class BaseEnemy : MonoBehaviour
 {
     public UnityEvent<GameObject> OnDie; 
-    protected enum States // ������� ������ � ��������� � �������� ������
+    protected enum States
     {
         Inactive,
         Attacking,
@@ -70,6 +70,7 @@ public class BaseEnemy : MonoBehaviour
     {
         if (_state == States.Inactive)
             return;
+
     }
 
     protected virtual IEnumerator Attack()

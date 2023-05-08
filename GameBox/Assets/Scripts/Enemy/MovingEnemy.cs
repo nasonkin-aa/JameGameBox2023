@@ -13,6 +13,7 @@ public class MovingEnemy : BaseEnemy
     protected NavMeshAgent agent;
     protected Vector2 _previousePos;
     protected int _layerMask;
+    protected Vector3 _localPosition;
 
 
     protected override void Start()
@@ -23,6 +24,7 @@ public class MovingEnemy : BaseEnemy
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         _previousePos = transform.position;
+        _localPosition = transform.localPosition;
     }
 
 
@@ -30,7 +32,10 @@ public class MovingEnemy : BaseEnemy
     protected override void FixedUpdate()
     {
         if (_state == States.Inactive)
+        {
+            transform.localPosition = _localPosition;
             return;
+        }
 
         if (_state != States.Dead)
             StateMachine();
