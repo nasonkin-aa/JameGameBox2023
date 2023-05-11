@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,7 +19,7 @@ public class TowerBehavior : MonoBehaviour
 
     private void Start()
     {
-        heroTransform = GameObject.FindObjectOfType<Character>().transform; // ищем героя в сцене по тегу
+        heroTransform = FindObjectOfType<Character>().transform; // ищем героя в сцене по тегу
     }
 
     public void Die()

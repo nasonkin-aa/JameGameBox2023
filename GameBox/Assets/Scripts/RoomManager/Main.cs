@@ -51,18 +51,21 @@ public class Main : IRoomManagerBase
     {
         Debug.Log("lose");
         EndOfLvl();
+        _tablo.ActivateLose();
     }
 
     public override void Finished()
     {
         Debug.Log("finish");
         EndOfLvl();
+        _tablo.ActivateWin();
     }
 
     public override void CharacterDie()
     {
         Debug.Log("die");
         EndOfLvl();
+        _tablo.ActivateLose();
     }
 
     public void RemoveAllEvents(IRoomManagerBase room)
@@ -94,7 +97,10 @@ public class Main : IRoomManagerBase
     {
         while (_currentRoom.transform.position.x < targetPositionX)
         {
-            _currentRoom.transform.position = Vector2.MoveTowards(_currentRoom.transform.position, new Vector2(targetPositionX, _currentRoom.transform.position.y), 5f * Time.deltaTime);
+            _currentRoom.transform.position = Vector2.MoveTowards(
+                _currentRoom.transform.position, 
+                new Vector2(targetPositionX, _currentRoom.transform.position.y),
+                5f * Time.deltaTime);
             yield return null;
         }
         Destroy(_currentRoom);
@@ -117,6 +123,5 @@ public class Main : IRoomManagerBase
         drone.GetComponent<DroneController>().OnPlayereTaken.AddListener(PlayerTaken);
 
         RemoveAllEvents(_newRoom);
-        _tablo.ActivateWin();
     }
 }

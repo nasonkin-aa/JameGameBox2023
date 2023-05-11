@@ -1,8 +1,5 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 public class DroneController : MonoBehaviour
 {
@@ -27,7 +24,6 @@ public class DroneController : MonoBehaviour
     private void Start()
     {
         playerTransform = FindObjectOfType<Character>().GetComponent<Transform>();
-        //playerSpeed = playerTransform.GetComponent<Character>()._defaultSpeed;
         
         BallCollider2D = FindObjectOfType<ChainBall>().GetComponent<CircleCollider2D>();
         PlayerCollider2D = playerTransform.GetComponent<CapsuleCollider2D>();
