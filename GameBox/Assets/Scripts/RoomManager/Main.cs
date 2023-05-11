@@ -50,34 +50,19 @@ public class Main : IRoomManagerBase
     public override void Failed()
     {
         Debug.Log("lose");
-        _isRoomStarted = false;
-        Instantiate(_drone, transform.position, transform.rotation);
-
-        RemoveAllEvents(_newRoom);
-        StartCoroutine(MoveRoomAway(_currentRoom.transform.position.x + 20));
-        _tablo.ActivateLose();
+        EndOfLvl();
     }
 
     public override void Finished()
     {
         Debug.Log("finish");
-        _isRoomStarted = false;
-        Instantiate(_drone, transform.position, transform.rotation);
-
-        RemoveAllEvents(_newRoom);
-        StartCoroutine(MoveRoomAway(_currentRoom.transform.position.x + 20));
-        _tablo.ActivateWin();
+        EndOfLvl();
     }
 
     public override void CharacterDie()
     {
         Debug.Log("die");
-        _isRoomStarted = false;
-        Instantiate(_drone, transform.position, transform.rotation);
-
-        RemoveAllEvents(_newRoom);
-        StartCoroutine(MoveRoomAway(_currentRoom.transform.position.x + 20));
-        _tablo.ActivateLose();
+        EndOfLvl();
     }
 
     public void RemoveAllEvents(IRoomManagerBase room)
@@ -109,7 +94,7 @@ public class Main : IRoomManagerBase
     {
         while (_currentRoom.transform.position.x < targetPositionX)
         {
-            _currentRoom.transform.position = Vector2.MoveTowards(_currentRoom.transform.position, new Vector2(targetPositionX, _currentRoom.transform.position.y), 2f * Time.deltaTime);
+            _currentRoom.transform.position = Vector2.MoveTowards(_currentRoom.transform.position, new Vector2(targetPositionX, _currentRoom.transform.position.y), 5f * Time.deltaTime);
             yield return null;
         }
         Destroy(_currentRoom);
@@ -118,5 +103,20 @@ public class Main : IRoomManagerBase
     public void GameOver()
     {
         Debug.Log("Игра окончена");
+    }
+
+    private void PlayerTaken()
+    {
+        StartCoroutine(MoveRoomAway(_currentRoom.transform.position.x + 20));
+    }
+
+    private void EndOfLvl()
+    {
+        _isRoomStarted = false;
+        var drone = Instantiate(_drone, transform.position, transform.rotation);
+        drone.GetComponent<DroneController>().OnPlayereTaken.AddListener(PlayerTaken);
+
+        RemoveAllEvents(_newRoom);
+        _tablo.ActivateWin();
     }
 }

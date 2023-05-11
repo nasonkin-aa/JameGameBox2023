@@ -31,6 +31,7 @@ public class Character : MonoBehaviour
     protected  Rigidbody2D _rbChar;
     protected bool _isMovingBlock = false;
     protected PickUpZone _pickUpZote;
+    protected Collider2D _collider;
 
     public bool IsMovingBlock 
     {
@@ -57,6 +58,7 @@ public class Character : MonoBehaviour
         _pickUpZote.OnBallPickUp.AddListener(OnBallPickUped);
         _pickUpZote.OnBallDrop.AddListener(OnBallDropped);
         _speedChar = _defaultSpeed;
+        _collider = GetComponent<Collider2D>();
     }
     private void Update()
     {
@@ -143,5 +145,17 @@ public class Character : MonoBehaviour
     public void TakeCoin()
     {
         OnTakeCoin.Invoke();
+    }
+
+    public void Disable()
+    {
+        _isMovingBlock = true;
+        _collider.enabled = false;
+    }
+
+    public void Enable()
+    {
+        _isMovingBlock = false;
+        _collider.enabled = true;
     }
 }
