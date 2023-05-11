@@ -40,12 +40,17 @@ public class RoomWaves : IRoomManagerBase
     public override void LevelProgress(int count)
     {
         _targetNow++;
-        OnLevelProgress.Invoke(_targetNow);
+        OnLevelProgress.Invoke(_targetNow); 
     }
 
     public override void CharacterEnter()
     {
         spawnManager.StartSpawn();
         OnStart.Invoke(CountToTarget);
+    }
+
+    public override void StopLvl ()
+    {
+        character.Disable();
     }
 }

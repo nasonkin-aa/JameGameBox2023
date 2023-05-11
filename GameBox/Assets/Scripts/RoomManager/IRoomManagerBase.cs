@@ -27,4 +27,6 @@ public abstract class IRoomManagerBase : MonoBehaviour
 
     public abstract void LevelProgress(int count);
 
+    public abstract void StopLvl();
+
 }

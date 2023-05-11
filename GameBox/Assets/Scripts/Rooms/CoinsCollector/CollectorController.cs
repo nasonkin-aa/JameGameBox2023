@@ -52,4 +52,9 @@ public class CollectorController : IRoomManagerBase
         if (_targetNow == CountToTarget)
             Finished();
     }
+
+    public override void StopLvl()
+    {
+        character.Disable();
+    }
 }

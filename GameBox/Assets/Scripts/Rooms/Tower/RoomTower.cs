@@ -54,4 +54,9 @@ public class RoomTower : IRoomManagerBase
     {
         OnLevelProgress.Invoke(count);
     }
+
+    public override void StopLvl()
+    {
+        character.Disable();
+    }
 }

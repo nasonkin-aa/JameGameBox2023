@@ -121,7 +121,13 @@ public class Main : IRoomManagerBase
         _isRoomStarted = false;
         var drone = Instantiate(_drone, transform.position, transform.rotation);
         drone.GetComponent<DroneController>().OnPlayereTaken.AddListener(PlayerTaken);
+        StopLvl();
 
         RemoveAllEvents(_newRoom);
+    }
+
+    public override void StopLvl()
+    {
+        _newRoom.StopLvl();
     }
 }
